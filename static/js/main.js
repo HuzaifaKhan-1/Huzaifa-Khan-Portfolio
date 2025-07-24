@@ -522,6 +522,25 @@ function initializeAchievementGallery() {
     track.classList.add('auto-scroll');
 }
 
+// Scroll indicator functionality
+document.addEventListener('DOMContentLoaded', function() {
+    const scrollIndicator = document.querySelector('.scroll-indicator');
+    if (scrollIndicator) {
+        scrollIndicator.addEventListener('click', () => {
+            const nextSection = document.querySelector('#achievement-gallery');
+            if (nextSection) {
+                nextSection.scrollIntoView({ 
+                    behavior: 'smooth',
+                    block: 'start'
+                });
+            }
+        });
+    }
+    
+    // Initialize achievement gallery
+    initializeAchievementGallery();
+});
+
 // Service worker registration for offline capability
 if ('serviceWorker' in navigator) {
     window.addEventListener('load', () => {
