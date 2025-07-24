@@ -260,7 +260,7 @@ body {
 
 /* Hero Section */
 .hero {
-    min-height: 100vh;
+    min-height: 75vh;
     display: flex;
     align-items: center;
     position: relative;
@@ -462,16 +462,15 @@ body {
     50% { transform: translateY(10px); opacity: 1; }
 }
 
-/* Achievement Gallery */
+/* Achievement Gallery Section */
+.achievement-gallery-section {
+    background: var(--bg-secondary);
+    padding: 4rem 0;
+}
+
 .achievement-gallery {
-    position: absolute;
-    bottom: 80px;
-    left: 0;
-    right: 0;
-    padding: 0 2rem;
-    opacity: 0;
-    animation: fadeInUp 1s ease 2s forwards;
-    z-index: 5;
+    position: relative;
+    margin-top: 2rem;
 }
 
 .gallery-container {
@@ -650,9 +649,21 @@ body {
 
 /* Mobile Responsive Design for Achievement Gallery */
 @media (max-width: 768px) {
+    .achievement-gallery-section {
+        padding: 3rem 0;
+    }
+    
+    .section-title {
+        font-size: 2rem;
+    }
+    
+    .section-subtitle {
+        font-size: 1rem;
+    }
+    
     .achievement-gallery {
-        bottom: 60px;
         padding: 0 1rem;
+        margin-top: 1.5rem;
     }
     
     .gallery-container::before,
@@ -682,8 +693,20 @@ body {
 }
 
 @media (max-width: 480px) {
+    .achievement-gallery-section {
+        padding: 2rem 0;
+    }
+    
+    .section-title {
+        font-size: 1.8rem;
+    }
+    
+    .section-subtitle {
+        font-size: 0.9rem;
+        padding: 0 1rem;
+    }
+    
     .achievement-gallery {
-        bottom: 40px;
         padding: 0 0.5rem;
     }
     
@@ -709,10 +732,28 @@ body {
     }
 }
 
-/* Section Divider */
-.section-divider {
-    height: 80px;
-    background: transparent;
+/* Section Header */
+.section-header {
+    text-align: center;
+    margin-bottom: 3rem;
+}
+
+.section-title {
+    font-family: 'Orbitron', monospace;
+    font-size: 2.5rem;
+    font-weight: 900;
+    margin-bottom: 1rem;
+    background: var(--gradient-primary);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.section-subtitle {
+    font-size: 1.1rem;
+    color: var(--text-secondary);
+    max-width: 600px;
+    margin: 0 auto;
 }
 
 /* Section Styles */

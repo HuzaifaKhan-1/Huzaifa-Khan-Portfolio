@@ -45,6 +45,7 @@ Preferred communication style: Simple, everyday language.
 1. **Template System** (`templates/index.html`):
    - Single-page application structure
    - Preloader with animated loading
+   - Dedicated Achievement Gallery section with horizontal scrolling
    - Particle background container
    - Custom cursor effects
    - Responsive navigation
@@ -58,6 +59,7 @@ Preferred communication style: Simple, everyday language.
 3. **Interactive Features**:
    - **Particle System** (`static/js/particles.js`): Canvas-based particle animation with mouse interaction
    - **Typing Effect** (`static/js/typing.js`): Animated text typing with configurable options
+   - **Achievement Gallery** (`static/js/main.js`): Horizontal scrolling gallery with auto-scroll, navigation controls, and blur edge effects
    - **Main Controller** (`static/js/main.js`): Coordinates all interactive features
 
 ## Data Flow
@@ -124,3 +126,15 @@ Preferred communication style: Simple, everyday language.
 - **Responsive Images**: Viewport-based scaling for mobile devices
 
 The application is designed as a showcase portfolio with emphasis on visual appeal and user experience, utilizing modern web technologies while maintaining simplicity in the backend architecture.
+
+## Recent Changes (July 24, 2025)
+
+### Achievement Gallery Enhancement
+- Created dedicated "Achievement Gallery" section positioned between hero and about sections
+- Reduced hero section height from 100vh to 75vh for better layout balance
+- Implemented horizontal scrolling gallery with 12 achievement images
+- Added blur edge effects using CSS gradients for professional appearance
+- Increased auto-scroll speed to 2-second intervals for faster animation
+- Added theme-aware blur gradients that adapt to light/dark mode
+- Enhanced mobile responsiveness with adjusted padding and element sizes
+- Added proper section header with title and subtitle styling
