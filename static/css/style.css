@@ -462,6 +462,199 @@ body {
     50% { transform: translateY(10px); opacity: 1; }
 }
 
+/* Achievement Gallery */
+.achievement-gallery {
+    position: absolute;
+    bottom: 120px;
+    left: 0;
+    right: 0;
+    padding: 0 2rem;
+    opacity: 0;
+    animation: fadeInUp 1s ease 2s forwards;
+}
+
+.gallery-container {
+    position: relative;
+    overflow: hidden;
+    border-radius: 20px;
+    background: rgba(255, 255, 255, 0.05);
+    backdrop-filter: blur(20px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    box-shadow: var(--shadow-heavy);
+}
+
+.gallery-track {
+    display: flex;
+    transition: transform 0.8s cubic-bezier(0.25, 0.8, 0.25, 1);
+    will-change: transform;
+}
+
+.achievement-item {
+    flex: none;
+    width: 280px;
+    height: 200px;
+    margin-right: 20px;
+    position: relative;
+    border-radius: 15px;
+    overflow: hidden;
+    cursor: pointer;
+    transition: var(--transition);
+    background: var(--bg-tertiary);
+}
+
+.achievement-item:hover {
+    transform: scale(1.05) translateY(-10px);
+    box-shadow: var(--shadow-heavy);
+    z-index: 10;
+}
+
+.achievement-item img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.6s ease;
+}
+
+.achievement-item:hover img {
+    transform: scale(1.1);
+}
+
+.achievement-overlay {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: linear-gradient(transparent, rgba(0, 0, 0, 0.9));
+    padding: 20px 15px 15px;
+    transform: translateY(100%);
+    transition: transform 0.4s ease;
+}
+
+.achievement-item:hover .achievement-overlay {
+    transform: translateY(0);
+}
+
+.achievement-overlay h4 {
+    color: white;
+    font-size: 1rem;
+    font-weight: 600;
+    margin-bottom: 5px;
+    line-height: 1.2;
+}
+
+.achievement-overlay p {
+    color: rgba(255, 255, 255, 0.8);
+    font-size: 0.85rem;
+    line-height: 1.3;
+}
+
+.gallery-controls {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    padding: 0 10px;
+    pointer-events: none;
+}
+
+.gallery-btn {
+    width: 45px;
+    height: 45px;
+    border-radius: 50%;
+    background: rgba(0, 212, 255, 0.9);
+    border: none;
+    color: white;
+    cursor: pointer;
+    transition: var(--transition);
+    pointer-events: all;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.2rem;
+    backdrop-filter: blur(10px);
+    box-shadow: 0 4px 20px rgba(0, 212, 255, 0.3);
+}
+
+.gallery-btn:hover {
+    background: var(--primary-color);
+    transform: scale(1.1);
+    box-shadow: 0 6px 25px rgba(0, 212, 255, 0.4);
+}
+
+.gallery-btn:active {
+    transform: scale(0.95);
+}
+
+/* Auto-scroll animation */
+@keyframes autoScroll {
+    0% { transform: translateX(0); }
+    25% { transform: translateX(-25%); }
+    50% { transform: translateX(-50%); }
+    75% { transform: translateX(-75%); }
+    100% { transform: translateX(0); }
+}
+
+.gallery-track.auto-scroll {
+    animation: autoScroll 20s linear infinite;
+}
+
+.gallery-track.auto-scroll:hover {
+    animation-play-state: paused;
+}
+
+/* Mobile Responsive Design for Achievement Gallery */
+@media (max-width: 768px) {
+    .achievement-gallery {
+        bottom: 80px;
+        padding: 0 1rem;
+    }
+    
+    .achievement-item {
+        width: 250px;
+        height: 160px;
+        margin-right: 15px;
+    }
+    
+    .gallery-btn {
+        width: 35px;
+        height: 35px;
+        font-size: 1rem;
+    }
+    
+    .achievement-overlay h4 {
+        font-size: 0.9rem;
+    }
+    
+    .achievement-overlay p {
+        font-size: 0.8rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .achievement-gallery {
+        bottom: 60px;
+        padding: 0 0.5rem;
+    }
+    
+    .achievement-item {
+        width: 200px;
+        height: 140px;
+        margin-right: 10px;
+    }
+    
+    .gallery-controls {
+        padding: 0 5px;
+    }
+    
+    .gallery-btn {
+        width: 30px;
+        height: 30px;
+        font-size: 0.9rem;
+    }
+}
+
 /* Section Styles */
 section {
     padding: 5rem 0;

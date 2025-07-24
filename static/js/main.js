@@ -10,6 +10,7 @@ document.addEventListener('DOMContentLoaded', function() {
     initializeContactForm();
     initializeCounters();
     initializePreloader();
+    initializeAchievementGallery();
     
     // Add smooth scrolling
     addSmoothScrolling();
@@ -501,6 +502,187 @@ if ('requestIdleCallback' in window) {
     requestIdleCallback(() => {
         // Initialize non-critical features
         console.log('Portfolio loaded successfully');
+    });
+}
+
+// Achievement Gallery
+function initializeAchievementGallery() {
+    const track = document.getElementById('achievementTrack');
+    const prevBtn = document.getElementById('prevBtn');
+    const nextBtn = document.getElementById('nextBtn');
+    
+    if (!track || !prevBtn || !nextBtn) return;
+    
+    let currentIndex = 0;
+    const items = track.children;
+    const itemWidth = 300; // 280px width + 20px margin
+    const visibleItems = Math.floor(window.innerWidth / itemWidth);
+    const maxIndex = Math.max(0, items.length - visibleItems);
+    
+    // Auto-scroll functionality
+    let autoScrollInterval;
+    let isUserInteracting = false;
+    
+    function updateGallery() {
+        const translateX = -(currentIndex * itemWidth);
+        track.style.transform = `translateX(${translateX}px)`;
+        
+        // Update button states
+        prevBtn.style.opacity = currentIndex === 0 ? '0.5' : '1';
+        nextBtn.style.opacity = currentIndex >= maxIndex ? '0.5' : '1';
+    }
+    
+    function nextSlide() {
+        if (currentIndex < maxIndex) {
+            currentIndex++;
+            updateGallery();
+        } else {
+            currentIndex = 0;
+            updateGallery();
+        }
+    }
+    
+    function prevSlide() {
+        if (currentIndex > 0) {
+            currentIndex--;
+            updateGallery();
+        } else {
+            currentIndex = maxIndex;
+            updateGallery();
+        }
+    }
+    
+    function startAutoScroll() {
+        if (!isUserInteracting) {
+            autoScrollInterval = setInterval(nextSlide, 3000);
+        }
+    }
+    
+    function stopAutoScroll() {
+        clearInterval(autoScrollInterval);
+    }
+    
+    // Event listeners
+    nextBtn.addEventListener('click', () => {
+        isUserInteracting = true;
+        stopAutoScroll();
+        nextSlide();
+        setTimeout(() => {
+            isUserInteracting = false;
+            startAutoScroll();
+        }, 5000);
+    });
+    
+    prevBtn.addEventListener('click', () => {
+        isUserInteracting = true;
+        stopAutoScroll();
+        prevSlide();
+        setTimeout(() => {
+            isUserInteracting = false;
+            startAutoScroll();
+        }, 5000);
+    });
+    
+    // Pause auto-scroll on hover
+    track.addEventListener('mouseenter', () => {
+        isUserInteracting = true;
+        stopAutoScroll();
+    });
+    
+    track.addEventListener('mouseleave', () => {
+        isUserInteracting = false;
+        startAutoScroll();
+    });
+    
+    // Touch/swipe support
+    let startX = 0;
+    let isDragging = false;
+    
+    track.addEventListener('touchstart', (e) => {
+        startX = e.touches[0].clientX;
+        isDragging = true;
+        isUserInteracting = true;
+        stopAutoScroll();
+    });
+    
+    track.addEventListener('touchmove', (e) => {
+        if (!isDragging) return;
+        e.preventDefault();
+    });
+    
+    track.addEventListener('touchend', (e) => {
+        if (!isDragging) return;
+        
+        const endX = e.changedTouches[0].clientX;
+        const diff = startX - endX;
+        
+        if (Math.abs(diff) > 50) {
+            if (diff > 0) {
+                nextSlide();
+            } else {
+                prevSlide();
+            }
+        }
+        
+        isDragging = false;
+        setTimeout(() => {
+            isUserInteracting = false;
+            startAutoScroll();
+        }, 5000);
+    });
+    
+    // Keyboard navigation
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'ArrowLeft') {
+            isUserInteracting = true;
+            stopAutoScroll();
+            prevSlide();
+            setTimeout(() => {
+                isUserInteracting = false;
+                startAutoScroll();
+            }, 5000);
+        } else if (e.key === 'ArrowRight') {
+            isUserInteracting = true;
+            stopAutoScroll();
+            nextSlide();
+            setTimeout(() => {
+                isUserInteracting = false;
+                startAutoScroll();
+            }, 5000);
+        }
+    });
+    
+    // Window resize handler
+    window.addEventListener('resize', throttle(() => {
+        const newVisibleItems = Math.floor(window.innerWidth / itemWidth);
+        const newMaxIndex = Math.max(0, items.length - newVisibleItems);
+        
+        if (currentIndex > newMaxIndex) {
+            currentIndex = newMaxIndex;
+        }
+        
+        updateGallery();
+    }, 250));
+    
+    // Initialize
+    updateGallery();
+    
+    // Start auto-scroll after a delay
+    setTimeout(() => {
+        if (!isUserInteracting) {
+            startAutoScroll();
+        }
+    }, 3000);
+    
+    // Add click handlers for achievement items
+    Array.from(items).forEach((item, index) => {
+        item.addEventListener('click', () => {
+            // Add a subtle click animation
+            item.style.transform = 'scale(0.95)';
+            setTimeout(() => {
+                item.style.transform = '';
+            }, 150);
+        });
     });
 }
 
