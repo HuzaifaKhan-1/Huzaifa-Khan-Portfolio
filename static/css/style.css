@@ -465,12 +465,13 @@ body {
 /* Achievement Gallery */
 .achievement-gallery {
     position: absolute;
-    bottom: 120px;
+    bottom: 80px;
     left: 0;
     right: 0;
     padding: 0 2rem;
     opacity: 0;
     animation: fadeInUp 1s ease 2s forwards;
+    z-index: 5;
 }
 
 .gallery-container {
@@ -483,10 +484,53 @@ body {
     box-shadow: var(--shadow-heavy);
 }
 
+.gallery-container::before,
+.gallery-container::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    width: 80px;
+    z-index: 10;
+    pointer-events: none;
+}
+
+.gallery-container::before {
+    left: 0;
+    background: linear-gradient(90deg, 
+        rgba(10, 10, 15, 0.9) 0%, 
+        rgba(10, 10, 15, 0.7) 30%, 
+        transparent 100%);
+}
+
+.gallery-container::after {
+    right: 0;
+    background: linear-gradient(-90deg, 
+        rgba(10, 10, 15, 0.9) 0%, 
+        rgba(10, 10, 15, 0.7) 30%, 
+        transparent 100%);
+}
+
+[data-theme="light"] .gallery-container::before {
+    background: linear-gradient(90deg, 
+        rgba(255, 255, 255, 0.9) 0%, 
+        rgba(255, 255, 255, 0.7) 30%, 
+        transparent 100%);
+}
+
+[data-theme="light"] .gallery-container::after {
+    background: linear-gradient(-90deg, 
+        rgba(255, 255, 255, 0.9) 0%, 
+        rgba(255, 255, 255, 0.7) 30%, 
+        transparent 100%);
+}
+
 .gallery-track {
     display: flex;
-    transition: transform 0.8s cubic-bezier(0.25, 0.8, 0.25, 1);
+    transition: transform 0.6s cubic-bezier(0.25, 0.8, 0.25, 1);
     will-change: transform;
+    padding: 20px 0;
+    margin-left: 20px;
 }
 
 .achievement-item {
@@ -504,7 +548,7 @@ body {
 
 .achievement-item:hover {
     transform: scale(1.05) translateY(-10px);
-    box-shadow: var(--shadow-heavy);
+    box-shadow: var(--shadow-heavy), 0 0 30px rgba(0, 212, 255, 0.3);
     z-index: 10;
 }
 
@@ -597,7 +641,7 @@ body {
 }
 
 .gallery-track.auto-scroll {
-    animation: autoScroll 20s linear infinite;
+    animation: autoScroll 15s linear infinite;
 }
 
 .gallery-track.auto-scroll:hover {
@@ -607,8 +651,13 @@ body {
 /* Mobile Responsive Design for Achievement Gallery */
 @media (max-width: 768px) {
     .achievement-gallery {
-        bottom: 80px;
+        bottom: 60px;
         padding: 0 1rem;
+    }
+    
+    .gallery-container::before,
+    .gallery-container::after {
+        width: 60px;
     }
     
     .achievement-item {
@@ -634,8 +683,13 @@ body {
 
 @media (max-width: 480px) {
     .achievement-gallery {
-        bottom: 60px;
+        bottom: 40px;
         padding: 0 0.5rem;
+    }
+    
+    .gallery-container::before,
+    .gallery-container::after {
+        width: 40px;
     }
     
     .achievement-item {
@@ -653,6 +707,12 @@ body {
         height: 30px;
         font-size: 0.9rem;
     }
+}
+
+/* Section Divider */
+.section-divider {
+    height: 80px;
+    background: transparent;
 }
 
 /* Section Styles */

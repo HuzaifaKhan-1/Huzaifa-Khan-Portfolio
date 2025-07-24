@@ -554,7 +554,7 @@ function initializeAchievementGallery() {
     
     function startAutoScroll() {
         if (!isUserInteracting) {
-            autoScrollInterval = setInterval(nextSlide, 3000);
+            autoScrollInterval = setInterval(nextSlide, 2000);
         }
     }
     
@@ -672,7 +672,7 @@ function initializeAchievementGallery() {
         if (!isUserInteracting) {
             startAutoScroll();
         }
-    }, 3000);
+    }, 2000);
     
     // Add click handlers for achievement items
     Array.from(items).forEach((item, index) => {
