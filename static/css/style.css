@@ -515,7 +515,7 @@ body {
 /* Achievement Gallery Section */
 .achievement-gallery-section {
     background: var(--bg-secondary);
-    padding: 4rem 0;
+    padding: 4rem 1rem;
 }
 
 .achievement-gallery {
@@ -658,7 +658,7 @@ body {
 /* Mobile Responsive Design for Achievement Gallery */
 @media (max-width: 768px) {
     .achievement-gallery-section {
-        padding: 3rem 0;
+        padding: 3rem 0.5rem;
     }
     
     .section-title {
@@ -670,7 +670,7 @@ body {
     }
     
     .achievement-gallery {
-        padding: 0 1rem;
+        padding: 0 0.5rem;
         margin-top: 1.5rem;
     }
     
@@ -696,7 +696,7 @@ body {
 
 @media (max-width: 480px) {
     .achievement-gallery-section {
-        padding: 2rem 0;
+        padding: 2rem 0.25rem;
     }
     
     .section-title {
@@ -709,7 +709,7 @@ body {
     }
     
     .achievement-gallery {
-        padding: 0 0.5rem;
+        padding: 0 0.25rem;
     }
     
     .gallery-container::before,

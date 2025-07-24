@@ -344,9 +344,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const texts = [
             "Hi, I'm Huzaifa Kamaal Khan",
             "AI/ML Enthusiast",
-            "Full-Stack Developer",
-            "ISRO Hackathon Finalist",
-            "Innovation Leader"
+            "Full-Stack Developer"
         ];
         
         new TypingEffect(typingElement, texts, {
