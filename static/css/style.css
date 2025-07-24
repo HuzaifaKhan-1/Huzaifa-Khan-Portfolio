@@ -411,13 +411,8 @@ body {
     transform: translateX(80px);
     z-index: 2;
     overflow: hidden;
-    border-radius: 30px 0 0 30px;
-    border: 3px solid rgba(0, 0, 0, 0.8);
-    box-shadow: 
-        -40px 0 80px rgba(0, 0, 0, 0.6),
-        -80px 0 160px rgba(0, 0, 0, 0.3),
-        inset 0 0 0 2px rgba(255, 255, 255, 0.05),
-        0 0 40px rgba(255, 255, 255, 0.1);
+    border-radius: 0;
+    border: none;
 }
 
 .modern-profile-image {
@@ -427,52 +422,28 @@ body {
     object-position: center top;
     filter: brightness(1.15) contrast(1.1) saturate(1.1);
     transition: all 0.6s ease;
-    border-radius: 27px 0 0 27px;
+    border-radius: 0;
+    mask: linear-gradient(
+        90deg,
+        rgba(0,0,0,0) 0%,
+        rgba(0,0,0,0.3) 15%,
+        rgba(0,0,0,0.8) 25%,
+        rgba(0,0,0,1) 35%,
+        rgba(0,0,0,1) 100%
+    );
 }
 
 .profile-gradient-overlay {
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background: linear-gradient(
-        90deg,
-        rgba(10, 10, 15, 0.7) 0%,
-        rgba(10, 10, 15, 0.3) 25%,
-        rgba(10, 10, 15, 0.1) 40%,
-        transparent 60%
-    );
-    pointer-events: none;
-    transition: all 0.6s ease;
-    border-radius: 27px 0 0 27px;
+    display: none;
 }
 
 [data-theme="light"] .profile-gradient-overlay {
-    background: linear-gradient(
-        90deg,
-        rgba(255, 255, 255, 0.8) 0%,
-        rgba(255, 255, 255, 0.4) 25%,
-        rgba(255, 255, 255, 0.2) 40%,
-        transparent 60%
-    );
+    display: none;
 }
 
 .modern-profile-container:hover .modern-profile-image {
     filter: brightness(1.2) contrast(1.15) saturate(1.15);
     transform: scale(1.01);
-}
-
-.modern-profile-container:hover .profile-gradient-overlay {
-    opacity: 0.8;
-}
-
-.modern-profile-container:hover {
-    box-shadow: 
-        -50px 0 100px rgba(0, 0, 0, 0.7),
-        -100px 0 200px rgba(0, 0, 0, 0.4),
-        inset 0 0 0 3px rgba(255, 255, 255, 0.1),
-        0 0 60px rgba(255, 255, 255, 0.15);
 }
 
 @keyframes float {
@@ -1492,18 +1463,19 @@ section {
         height: 450px;
         transform: translateX(0);
         margin: 0 auto;
-        border-radius: 25px;
-        box-shadow: 
-            0 20px 60px rgba(0, 0, 0, 0.4),
-            0 0 80px rgba(0, 0, 0, 0.2);
+        border-radius: 0;
+        border: none;
     }
     
     .modern-profile-image {
-        border-radius: 22px;
-    }
-    
-    .profile-gradient-overlay {
-        border-radius: 22px;
+        border-radius: 0;
+        mask: linear-gradient(
+            90deg,
+            rgba(0,0,0,0) 0%,
+            rgba(0,0,0,0.5) 20%,
+            rgba(0,0,0,1) 40%,
+            rgba(0,0,0,1) 100%
+        );
     }
     
     .about-content {
@@ -1565,15 +1537,19 @@ section {
     .modern-profile-container {
         width: 300px;
         height: 380px;
-        border-radius: 20px;
+        border-radius: 0;
+        border: none;
     }
     
     .modern-profile-image {
-        border-radius: 17px;
-    }
-    
-    .profile-gradient-overlay {
-        border-radius: 17px;
+        border-radius: 0;
+        mask: linear-gradient(
+            90deg,
+            rgba(0,0,0,0) 0%,
+            rgba(0,0,0,0.6) 25%,
+            rgba(0,0,0,1) 45%,
+            rgba(0,0,0,1) 100%
+        );
     }
     
     .scroll-indicator {
