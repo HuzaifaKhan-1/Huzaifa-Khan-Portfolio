@@ -13,6 +13,7 @@ document.addEventListener('DOMContentLoaded', function() {
     initializeAchievementGallery();
     initializeAchievementModal();
     initializeProjectModal();
+    initializeCertificateModal();
 
     // Add smooth scrolling
     addSmoothScrolling();
@@ -1247,6 +1248,196 @@ document.addEventListener('DOMContentLoaded', function() {
     // Initialize achievement gallery
     initializeAchievementGallery();
 });
+
+// Certificate Modal Data
+const certificateData = {
+    'google-ai-educators': {
+        title: 'Generative AI for Educators',
+        issuer: 'Google',
+        date: 'December 2024',
+        type: 'Professional Certificate',
+        credentialId: 'GOOG-AI-EDU-2024-001',
+        description: 'Comprehensive certification covering the fundamentals and applications of generative AI in educational settings. This program focused on ethical AI implementation, prompt engineering, and integrating AI tools into curriculum design.',
+        skills: ['Generative AI', 'Educational Technology', 'Prompt Engineering', 'AI Ethics', 'Curriculum Design'],
+        verificationUrl: 'https://google.com/verify/ai-educators',
+        certificateImage: 'assets/certificates/google-ai-educators.jpg'
+    },
+    'ibm-enterprise-ai': {
+        title: 'Enterprise Grade AI',
+        issuer: 'IBM',
+        date: 'November 2024',
+        type: 'Professional Certification',
+        credentialId: 'IBM-ENT-AI-2024-002',
+        description: 'Advanced certification in enterprise-level AI solutions, covering Watson AI platform, machine learning deployment, and enterprise AI strategy. Focused on scalable AI implementations for business solutions.',
+        skills: ['IBM Watson', 'Enterprise AI', 'ML Deployment', 'AI Strategy', 'Business Intelligence'],
+        verificationUrl: 'https://ibm.com/verify/enterprise-ai',
+        certificateImage: 'assets/certificates/ibm-enterprise-ai.jpg'
+    },
+    'adverk-ai': {
+        title: 'Artificial Intelligence Certification',
+        issuer: 'Adverk Technologies',
+        date: 'October 2024',
+        type: 'Industry Certification',
+        credentialId: 'ADV-AI-2024-003',
+        description: 'Comprehensive AI certification covering machine learning algorithms, deep learning frameworks, and practical AI implementation. Gained hands-on experience with real-world AI projects and industry best practices.',
+        skills: ['Machine Learning', 'Deep Learning', 'Neural Networks', 'Data Science', 'AI Implementation'],
+        verificationUrl: 'https://adverk.com/verify/ai-certification',
+        certificateImage: 'assets/certificates/adverk-ai.jpg'
+    },
+    'aws-python-ai': {
+        title: 'Python & AI Certification',
+        issuer: 'AWS',
+        date: 'September 2024',
+        type: 'Cloud Certification',
+        credentialId: 'AWS-PY-AI-2024-004',
+        description: 'Specialized certification in Python programming for AI applications on AWS cloud platform. Covered serverless AI, SageMaker, and deploying ML models at scale using AWS services.',
+        skills: ['Python Programming', 'AWS SageMaker', 'Cloud AI', 'Serverless Computing', 'ML Deployment'],
+        verificationUrl: 'https://aws.amazon.com/verify/python-ai',
+        certificateImage: 'assets/certificates/aws-python-ai.jpg'
+    },
+    'tata-crucible': {
+        title: 'TATA Crucible Participation',
+        issuer: 'TATA Group',
+        date: 'August 2024',
+        type: 'Competition Certificate',
+        credentialId: 'TATA-CRU-2024-005',
+        description: 'Participated in TATA Crucible, India\'s most prestigious business quiz competition. Demonstrated knowledge across business, economics, and current affairs while competing against top talent nationwide.',
+        skills: ['Business Knowledge', 'Strategic Thinking', 'Current Affairs', 'Team Collaboration', 'Competitive Analysis'],
+        verificationUrl: 'https://tata.com/verify/crucible',
+        certificateImage: 'assets/certificates/tata-crucible.jpg'
+    },
+    'flipkart-grid': {
+        title: 'Flipkart Grid 6.0 Participation',
+        issuer: 'Flipkart',
+        date: 'July 2024',
+        type: 'Hackathon Certificate',
+        credentialId: 'FLIP-GRID-2024-006',
+        description: 'Participated in Flipkart Grid 6.0, a national-level engineering challenge focused on e-commerce technology solutions. Developed innovative solutions for supply chain optimization and customer experience enhancement.',
+        skills: ['Software Development', 'Problem Solving', 'E-commerce Technology', 'Innovation', 'Team Collaboration'],
+        verificationUrl: 'https://flipkart.com/verify/grid',
+        certificateImage: 'assets/certificates/flipkart-grid.jpg'
+    },
+    'google-genai-studio': {
+        title: 'GenAI Studio Certification',
+        issuer: 'Google',
+        date: 'June 2024',
+        type: 'Technical Certification',
+        credentialId: 'GOOG-STUDIO-2024-007',
+        description: 'Advanced certification in Google\'s GenAI Studio platform, focusing on building and deploying generative AI applications. Mastered prompt engineering, model fine-tuning, and API integration.',
+        skills: ['GenAI Studio', 'Model Fine-tuning', 'API Integration', 'Prompt Engineering', 'AI Application Development'],
+        verificationUrl: 'https://google.com/verify/genai-studio',
+        certificateImage: 'assets/certificates/google-genai-studio.jpg'
+    },
+    'kpit-innovation': {
+        title: 'KPIT Innovation Certificate',
+        issuer: 'KPIT Technologies',
+        date: 'January 2025',
+        type: 'Innovation Award',
+        credentialId: 'KPIT-INN-2025-008',
+        description: 'Recognition certificate for achieving Top 6 finalist position in KPIT Sparkle 2025 innovation challenge. Demonstrated exceptional innovation in autonomous vehicle technology and mobility solutions.',
+        skills: ['Innovation', 'Autonomous Systems', 'Mobility Solutions', 'Team Leadership', 'Technical Excellence'],
+        verificationUrl: 'https://kpit.com/verify/innovation',
+        certificateImage: 'assets/certificates/kpit-innovation.jpg'
+    }
+};
+
+// Certificate Modal Functionality
+function initializeCertificateModal() {
+    const modal = document.getElementById('certificateModal');
+    const modalOverlay = document.getElementById('certificateModalOverlay');
+    const modalClose = document.getElementById('certificateModalClose');
+    const certificateCards = document.querySelectorAll('.cert-card[data-certificate]');
+
+    // Add click listeners to certificate cards
+    certificateCards.forEach(card => {
+        card.addEventListener('click', () => {
+            const certificateId = card.getAttribute('data-certificate');
+            if (certificateData[certificateId]) {
+                openCertificateModal(certificateId);
+            }
+        });
+    });
+
+    // Close modal functionality
+    function closeCertificateModal() {
+        modal.classList.remove('active');
+        document.body.style.overflow = '';
+    }
+
+    modalClose.addEventListener('click', closeCertificateModal);
+    modalOverlay.addEventListener('click', closeCertificateModal);
+
+    // Close on Escape key
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && modal.classList.contains('active')) {
+            closeCertificateModal();
+        }
+    });
+}
+
+function openCertificateModal(certificateId) {
+    const modal = document.getElementById('certificateModal');
+    const data = certificateData[certificateId];
+
+    if (!data) return;
+
+    // Populate modal content
+    document.getElementById('certificateModalTitle').textContent = data.title;
+    document.getElementById('certificateModalIssuer').textContent = data.issuer;
+    document.getElementById('certificateModalDate').textContent = data.date;
+    document.getElementById('certificateModalType').textContent = data.type;
+    document.getElementById('certificateModalCredential').textContent = data.credentialId;
+    document.getElementById('certificateModalDescription').textContent = data.description;
+
+    // Set certificate image
+    const certificateImage = document.getElementById('certificateModalImage');
+    const certificateLoading = document.getElementById('certificateLoading');
+    
+    // Show loading state
+    certificateLoading.style.display = 'flex';
+    certificateImage.style.display = 'none';
+    
+    certificateImage.src = `static/${data.certificateImage}`;
+    certificateImage.alt = data.title;
+    
+    // Handle image load/error
+    certificateImage.onload = function() {
+        certificateLoading.style.display = 'none';
+        certificateImage.style.display = 'block';
+    };
+    
+    certificateImage.onerror = function() {
+        certificateLoading.innerHTML = `
+            <i class="fas fa-certificate"></i>
+            <span>Certificate Image Coming Soon</span>
+        `;
+        this.style.display = 'none';
+    };
+
+    // Create skills tags
+    const skillsContainer = document.getElementById('certificateModalSkills');
+    skillsContainer.innerHTML = data.skills.map(skill => 
+        `<span class="skill-tag">${skill}</span>`
+    ).join('');
+
+    // Add verification link
+    const linksContainer = document.getElementById('certificateModalLinks');
+    linksContainer.innerHTML = `
+        <a href="${data.verificationUrl}" target="_blank" class="verification-link">
+            <i class="fas fa-external-link-alt"></i> Verify Certificate
+        </a>
+        <div style="margin-top: 0.5rem; color: var(--text-muted); font-size: 0.9rem;">
+            <i class="fas fa-shield-alt"></i> Credential ID: ${data.credentialId}
+        </div>
+    `;
+
+    // Show modal
+    modal.style.display = 'block';
+    setTimeout(() => {
+        modal.classList.add('active');
+    }, 10);
+    document.body.style.overflow = 'hidden';
+}
 
 // Service worker registration for offline capability
 if ('serviceWorker' in navigator) {

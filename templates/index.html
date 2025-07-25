@@ -760,69 +760,77 @@
                 <div class="section-subtitle">Professional credentials and achievements</div>
             </div>
             <div class="certifications-grid">
-                <div class="cert-card">
+                <div class="cert-card cert-clickable" data-certificate="google-ai-educators">
                     <div class="cert-icon">
                         <i class="fab fa-google"></i>
                     </div>
                     <h3>Generative AI for Educators</h3>
                     <p class="cert-issuer">Google</p>
                     <div class="cert-badge">Verified</div>
+                    <div class="cert-click-indicator">Click to view certificate</div>
                 </div>
-                <div class="cert-card">
+                <div class="cert-card cert-clickable" data-certificate="ibm-enterprise-ai">
                     <div class="cert-icon">
                         <i class="fab fa-ibm"></i>
                     </div>
                     <h3>Enterprise Grade AI</h3>
                     <p class="cert-issuer">IBM</p>
                     <div class="cert-badge">Verified</div>
+                    <div class="cert-click-indicator">Click to view certificate</div>
                 </div>
-                <div class="cert-card">
+                <div class="cert-card cert-clickable" data-certificate="adverk-ai">
                     <div class="cert-icon">
                         <i class="fas fa-brain"></i>
                     </div>
                     <h3>Artificial Intelligence</h3>
                     <p class="cert-issuer">Adverk Technologies</p>
                     <div class="cert-badge">Verified</div>
+                    <div class="cert-click-indicator">Click to view certificate</div>
                 </div>
-                <div class="cert-card">
+                <div class="cert-card cert-clickable" data-certificate="aws-python-ai">
                     <div class="cert-icon">
                         <i class="fab fa-aws"></i>
                     </div>
                     <h3>Python & AI</h3>
                     <p class="cert-issuer">AWS</p>
                     <div class="cert-badge">Verified</div>
+                    <div class="cert-click-indicator">Click to view certificate</div>
                 </div>
-                <div class="cert-card">
+                <div class="cert-card cert-clickable" data-certificate="tata-crucible">
                     <div class="cert-icon">
                         <i class="fas fa-trophy"></i>
                     </div>
                     <h3>TATA Crucible</h3>
                     <p class="cert-issuer">TATA Group</p>
                     <div class="cert-badge">Participant</div>
+                    <div class="cert-click-indicator">Click to view certificate</div>
                 </div>
-                <div class="cert-card">
+                <div class="cert-card cert-clickable" data-certificate="flipkart-grid">
                     <div class="cert-icon">
                         <i class="fas fa-shopping-cart"></i>
                     </div>
                     <h3>Flipkart Grid 6.0</h3>
                     <p class="cert-issuer">Flipkart</p>
                     <div class="cert-badge">Participant</div>
+                    <div class="cert-click-indicator">Click to view certificate</div>
                 </div>
-                <div class="cert-card">
+                <div class="cert-card cert-clickable" data-certificate="google-genai-studio">
                     <div class="cert-icon">
                         <i class="fab fa-google"></i>
                     </div>
                     <h3>GenAI Studio</h3>
                     <p class="cert-issuer">Google</p>
                     <div class="cert-badge">Verified</div>
+                    <div class="cert-click-indicator">Click to view certificate</div>
                 </div>
-                <div class="cert-card">
+                <div class="cert-card cert-clickable" data-certificate="kpit-innovation">
                     <div class="cert-icon">
                         <i class="fas fa-car"></i>
                     </div>
                     <h3>KPIT Innovation</h3>
                     <p class="cert-issuer">KPIT Technologies</p>
                     <div class="cert-badge">Finalist</div>
+                    <div class="cert-click-indicator">Click to view certificate</div>
                 </div>
             </div>
         </div>
@@ -1036,6 +1044,69 @@
                         <h3><i class="fas fa-tools"></i> Technologies Used</h3>
                         <div class="tech-stack" id="modalTechStack">
                             <!-- Technology badges will be inserted here -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Certificate Modal -->
+    <div id="certificateModal" class="certificate-modal">
+        <div class="modal-overlay" id="certificateModalOverlay"></div>
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 id="certificateModalTitle">Certificate Title</h2>
+                <button class="modal-close" id="certificateModalClose">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="certificate-display">
+                    <div class="certificate-image-container">
+                        <img id="certificateModalImage" src="" alt="Certificate">
+                        <div class="certificate-loading" id="certificateLoading">
+                            <i class="fas fa-spinner fa-spin"></i>
+                            <span>Loading Certificate...</span>
+                        </div>
+                    </div>
+                    <div class="certificate-details">
+                        <div class="certificate-meta">
+                            <div class="meta-item">
+                                <i class="fas fa-building"></i>
+                                <span id="certificateModalIssuer">Issuer</span>
+                            </div>
+                            <div class="meta-item">
+                                <i class="fas fa-calendar"></i>
+                                <span id="certificateModalDate">Date</span>
+                            </div>
+                            <div class="meta-item">
+                                <i class="fas fa-award"></i>
+                                <span id="certificateModalType">Type</span>
+                            </div>
+                            <div class="meta-item">
+                                <i class="fas fa-link"></i>
+                                <span id="certificateModalCredential">Credential ID</span>
+                            </div>
+                        </div>
+                        
+                        <div class="certificate-section">
+                            <h3><i class="fas fa-info-circle"></i> About This Certification</h3>
+                            <p id="certificateModalDescription">Certificate description will appear here</p>
+                        </div>
+                        
+                        <div class="certificate-section">
+                            <h3><i class="fas fa-check-circle"></i> Skills Demonstrated</h3>
+                            <div class="skills-gained" id="certificateModalSkills">
+                                <!-- Skills will be inserted here -->
+                            </div>
+                        </div>
+                        
+                        <div class="certificate-section">
+                            <h3><i class="fas fa-external-link-alt"></i> Verification</h3>
+                            <div class="verification-links" id="certificateModalLinks">
+                                <!-- Verification links will be inserted here -->
+                            </div>
                         </div>
                     </div>
                 </div>
