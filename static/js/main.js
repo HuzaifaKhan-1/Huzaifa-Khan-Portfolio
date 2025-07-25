@@ -672,10 +672,10 @@ function initializeAchievementModal() {
     const modal = document.getElementById('achievementModal');
     const modalOverlay = document.getElementById('modalOverlay');
     const modalClose = document.getElementById('modalClose');
-    const achievementItems = document.querySelectorAll('.achievement-item[data-achievement]');
+    const timelineItems = document.querySelectorAll('.timeline-item[data-achievement]');
     
-    // Add click listeners to achievement items
-    achievementItems.forEach(item => {
+    // Add click listeners to timeline achievement items
+    timelineItems.forEach(item => {
         item.addEventListener('click', () => {
             const achievementId = item.getAttribute('data-achievement');
             if (achievementData[achievementId]) {

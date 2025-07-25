@@ -1234,6 +1234,42 @@ section {
     margin-top: 1rem;
 }
 
+/* Clickable Achievement Styles */
+.achievement-clickable {
+    cursor: pointer;
+    transition: var(--transition);
+}
+
+.achievement-clickable:hover {
+    transform: translateY(-5px) !important;
+}
+
+.achievement-clickable:hover .timeline-content {
+    box-shadow: var(--shadow-heavy);
+    border: 1px solid var(--primary-color);
+}
+
+.click-indicator {
+    display: none;
+    position: absolute;
+    top: 10px;
+    right: 15px;
+    background: var(--primary-color);
+    color: var(--bg-primary);
+    padding: 4px 8px;
+    border-radius: 12px;
+    font-size: 0.7rem;
+    font-weight: 600;
+    opacity: 0;
+    transition: all 0.3s ease;
+}
+
+.achievement-clickable:hover .click-indicator {
+    display: block;
+    opacity: 1;
+    animation: pulse 2s infinite;
+}
+
 /* Experience Section */
 .experience-grid {
     display: grid;
