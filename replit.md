@@ -59,7 +59,8 @@ Preferred communication style: Simple, everyday language.
 3. **Interactive Features**:
    - **Particle System** (`static/js/particles.js`): Canvas-based particle animation with mouse interaction
    - **Typing Effect** (`static/js/typing.js`): Animated text typing with configurable options
-   - **Achievement Gallery** (`static/js/main.js`): Horizontal scrolling gallery with auto-scroll, navigation controls, and blur edge effects
+   - **Achievement Gallery** (`static/js/main.js`): Horizontal scrolling gallery with auto-scroll, blur edge effects, and clickable cards
+   - **Achievement Modal System** (`static/js/main.js`): Comprehensive modal popups with detailed achievement information, image galleries, and interactive navigation
    - **Main Controller** (`static/js/main.js`): Coordinates all interactive features
 
 ## Data Flow
@@ -127,9 +128,19 @@ Preferred communication style: Simple, everyday language.
 
 The application is designed as a showcase portfolio with emphasis on visual appeal and user experience, utilizing modern web technologies while maintaining simplicity in the backend architecture.
 
-## Recent Changes (July 24, 2025)
+## Recent Changes (July 25, 2025)
 
-### Achievement Gallery Enhancement
+### Interactive Achievement Modal System
+- Implemented clickable achievement cards with comprehensive modal popups
+- Added detailed achievement data including problem statements, implementation details, and technologies used
+- Created responsive modal design with image galleries and thumbnail navigation
+- Integrated comprehensive achievement information for all 12 achievements including KPIT Sparkle, teaching excellence, and academic presentations
+- Added smooth modal animations and backdrop blur effects
+- Implemented proper modal accessibility with keyboard navigation and close functionality
+- Created technology badges and categorized achievement metadata
+- Enhanced user experience with detailed visual storytelling for each accomplishment
+
+### Achievement Gallery Enhancement (July 24, 2025)
 - Created dedicated "Achievement Gallery" section positioned between hero and about sections
 - Reduced hero section height from 100vh to 75vh for better layout balance
 - Implemented horizontal scrolling gallery with 12 achievement images
@@ -138,3 +149,4 @@ The application is designed as a showcase portfolio with emphasis on visual appe
 - Added theme-aware blur gradients that adapt to light/dark mode
 - Enhanced mobile responsiveness with adjusted padding and element sizes
 - Added proper section header with title and subtitle styling
+- Reduced extreme left and right margins for optimal screen width utilization

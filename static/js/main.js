@@ -11,6 +11,7 @@ document.addEventListener('DOMContentLoaded', function() {
     initializeCounters();
     initializePreloader();
     initializeAchievementGallery();
+    initializeAchievementModal();
     
     // Add smooth scrolling
     addSmoothScrolling();
@@ -415,6 +416,349 @@ function initializePreloader() {
             }, 1000);
         }
     });
+}
+
+// Achievement Modal Data
+const achievementData = {
+    'faculty-induction': {
+        title: 'Faculty Induction Program',
+        date: 'January 2024',
+        location: 'JSPM\'s JSCOP, Pune',
+        category: 'Academic Recognition',
+        images: [
+            'assets/achievements/achievement1.jpg',
+            'assets/achievements/achievement3.jpg'
+        ],
+        problem: 'Participate in comprehensive faculty induction program to understand modern teaching methodologies and educational excellence standards in computer engineering education.',
+        implementation: [
+            'Attended comprehensive training sessions on modern teaching methodologies',
+            'Participated in workshops on curriculum development and assessment strategies',
+            'Engaged in interactive sessions on student engagement techniques',
+            'Completed modules on educational technology integration',
+            'Collaborated with experienced faculty members on best practices'
+        ],
+        impact: 'Successfully completed the faculty induction program with recognition for outstanding participation and commitment to educational excellence.',
+        technologies: ['Educational Technology', 'Curriculum Design', 'Assessment Tools', 'Teaching Methodologies']
+    },
+    'kpit-sparkle': {
+        title: 'KPIT Sparkle 2025 - Top 6 Finalist',
+        date: 'January 2025',
+        location: 'KPIT Technologies, Pune',
+        category: 'Innovation Competition',
+        images: [
+            'assets/achievements/achievement2.jpg',
+            'assets/achievements/achievement6.jpg',
+            'assets/achievements/achievement7.jpg',
+            'assets/achievements/achievement8.jpg'
+        ],
+        problem: 'Design innovative solutions for next-generation mobility challenges, focusing on autonomous vehicle technology and smart transportation systems.',
+        implementation: [
+            'Formed Team Vanguardians with diverse technical expertise',
+            'Developed autonomous vehicle navigation system using AI/ML algorithms',
+            'Implemented computer vision for real-time object detection and tracking',
+            'Created predictive analytics for traffic optimization',
+            'Built comprehensive prototype with hardware integration',
+            'Presented solution to industry experts and technical panel'
+        ],
+        impact: 'Achieved Top 6 finalist position among hundreds of participants, gaining recognition for innovative approach to mobility solutions and technical excellence.',
+        technologies: ['Python', 'Machine Learning', 'Computer Vision', 'IoT', 'Autonomous Systems', 'Data Analytics']
+    },
+    'teaching-excellence': {
+        title: 'Teaching Excellence Recognition',
+        date: 'March 2024',
+        location: 'JSPM\'s JSCOP, Pune',
+        category: 'Educational Impact',
+        images: [
+            'assets/achievements/achievement3.jpg',
+            'assets/achievements/achievement11.jpg'
+        ],
+        problem: 'Enhance student learning experience through innovative teaching methods and mentorship programs in computer engineering subjects.',
+        implementation: [
+            'Developed interactive coding workshops for complex algorithms',
+            'Created hands-on project-based learning modules',
+            'Implemented peer mentoring programs for struggling students',
+            'Introduced gamification elements in programming courses',
+            'Organized technical skill development sessions',
+            'Established regular feedback mechanisms for continuous improvement'
+        ],
+        impact: 'Significantly improved student engagement and academic performance, with 95% student satisfaction rate and notable improvement in programming skills.',
+        technologies: ['Educational Tools', 'Programming Languages', 'Interactive Learning', 'Project Management']
+    },
+    'academic-presentation': {
+        title: 'Academic Research Presentation',
+        date: 'February 2024',
+        location: 'JSPM\'s JSCOP, Pune',
+        category: 'Research & Innovation',
+        images: [
+            'assets/achievements/achievement4.jpg'
+        ],
+        problem: 'Present cutting-edge research findings in artificial intelligence and machine learning applications to academic and industry audience.',
+        implementation: [
+            'Conducted comprehensive literature review on AI/ML applications',
+            'Developed novel algorithms for predictive analytics',
+            'Performed extensive experimental validation and testing',
+            'Created detailed research documentation and analysis',
+            'Prepared comprehensive presentation with visual demonstrations',
+            'Engaged with peer reviewers and incorporated feedback'
+        ],
+        impact: 'Successfully presented research work to academic community, receiving positive feedback and recognition for innovative approach and technical depth.',
+        technologies: ['Machine Learning', 'Data Science', 'Research Methodologies', 'Statistical Analysis', 'Python']
+    },
+    'tech-innovation': {
+        title: 'Technology Innovation Leadership',
+        date: 'December 2024',
+        location: 'Innovation Hub',
+        category: 'Technology Leadership',
+        images: [
+            'assets/achievements/achievement5.jpg'
+        ],
+        problem: 'Lead technological innovation initiatives and develop cutting-edge solutions for industry challenges in AI and software development.',
+        implementation: [
+            'Spearheaded multiple technology innovation projects',
+            'Developed AI-powered applications for real-world problems',
+            'Led cross-functional teams in agile development environments',
+            'Implemented best practices for software development lifecycle',
+            'Created technical documentation and knowledge sharing sessions',
+            'Established partnerships with industry leaders for technology transfer'
+        ],
+        impact: 'Successfully delivered multiple innovative technology solutions, establishing leadership in emerging technologies and driving digital transformation initiatives.',
+        technologies: ['Artificial Intelligence', 'Full Stack Development', 'Cloud Computing', 'DevOps', 'Agile Methodologies']
+    },
+    'kpit-team': {
+        title: 'KPIT Sparkle Team Collaboration',
+        date: 'January 2025',
+        location: 'KPIT Technologies, Pune',
+        category: 'Team Achievement',
+        images: [
+            'assets/achievements/achievement6.jpg',
+            'assets/achievements/achievement2.jpg'
+        ],
+        problem: 'Collaborate effectively within Team Vanguardians to develop innovative mobility solutions and achieve collective success in national competition.',
+        implementation: [
+            'Established clear team roles and responsibilities',
+            'Implemented agile development practices for project management',
+            'Created effective communication channels and regular sync meetings',
+            'Developed complementary skills through knowledge sharing',
+            'Coordinated parallel development streams for optimal efficiency',
+            'Maintained high-quality standards through peer code reviews'
+        ],
+        impact: 'Demonstrated exceptional teamwork and collaborative innovation, contributing to team\'s success in reaching Top 6 finalist position.',
+        technologies: ['Team Collaboration', 'Project Management', 'Agile Methodologies', 'Version Control', 'Communication Tools']
+    },
+    'kpit-recognition': {
+        title: 'KPIT Individual Excellence Recognition',
+        date: 'January 2025',
+        location: 'KPIT Technologies, Pune',
+        category: 'Individual Achievement',
+        images: [
+            'assets/achievements/achievement7.jpg'
+        ],
+        problem: 'Demonstrate individual technical excellence and innovation capabilities in competitive environment while contributing to team success.',
+        implementation: [
+            'Developed core AI algorithms for autonomous navigation system',
+            'Implemented advanced computer vision modules for object detection',
+            'Created robust data processing pipelines for real-time analytics',
+            'Optimized system performance through algorithm refinement',
+            'Documented technical specifications and implementation details',
+            'Presented individual contributions to technical evaluation panel'
+        ],
+        impact: 'Received individual recognition for outstanding technical contributions and innovation in mobility solutions development.',
+        technologies: ['Python', 'Machine Learning', 'Computer Vision', 'Algorithm Optimization', 'Technical Documentation']
+    },
+    'mobility-innovation': {
+        title: 'Reimagining Mobility Solutions',
+        date: 'January 2025',
+        location: 'KPIT Innovation Center',
+        category: 'Future Technology',
+        images: [
+            'assets/achievements/achievement8.jpg'
+        ],
+        problem: 'Develop next-generation transportation solutions that address current mobility challenges including traffic congestion, safety, and environmental sustainability.',
+        implementation: [
+            'Researched current mobility challenges and emerging technology trends',
+            'Designed intelligent traffic management system using IoT and AI',
+            'Developed predictive models for traffic flow optimization',
+            'Created sustainable transportation algorithms',
+            'Integrated multiple data sources for comprehensive analytics',
+            'Built scalable architecture for city-wide deployment'
+        ],
+        impact: 'Created innovative mobility solution with potential for real-world implementation, demonstrating vision for future transportation systems.',
+        technologies: ['IoT', 'Artificial Intelligence', 'Big Data Analytics', 'Smart Cities', 'Sustainable Technology']
+    },
+    'executive-interaction': {
+        title: 'Industry Executive Leadership Meeting',
+        date: 'January 2025',
+        location: 'KPIT Technologies, Pune',
+        category: 'Leadership Interaction',
+        images: [
+            'assets/achievements/achievement9.jpg'
+        ],
+        problem: 'Engage with industry leaders to understand market needs, present innovative solutions, and gain insights into future technology trends.',
+        implementation: [
+            'Prepared comprehensive presentation of technical achievements',
+            'Researched market trends and industry challenges',
+            'Engaged in strategic discussions on technology roadmaps',
+            'Presented innovative solutions to executive leadership',
+            'Gathered valuable feedback on technology direction',
+            'Established professional network within industry leadership'
+        ],
+        impact: 'Successfully engaged with senior industry executives, gaining valuable insights and recognition for technical innovation and professional potential.',
+        technologies: ['Strategic Thinking', 'Executive Presentation', 'Market Analysis', 'Professional Networking']
+    },
+    'kpit-campus': {
+        title: 'KPIT Campus Innovation Experience',
+        date: 'January 2025',
+        location: 'KPIT Technologies Campus, Pune',
+        category: 'Innovation Hub',
+        images: [
+            'assets/achievements/achievement10.jpg'
+        ],
+        problem: 'Experience world-class innovation environment and collaborate with industry professionals to develop cutting-edge technology solutions.',
+        implementation: [
+            'Toured state-of-the-art research and development facilities',
+            'Participated in innovation workshops and technical sessions',
+            'Collaborated with industry experts on real-world challenges',
+            'Accessed advanced technology infrastructure and tools',
+            'Engaged in knowledge sharing with professional developers',
+            'Experienced industry-standard development practices'
+        ],
+        impact: 'Gained invaluable exposure to industry innovation processes and established foundation for future professional growth in technology sector.',
+        technologies: ['Innovation Processes', 'Industry Tools', 'Professional Development', 'Technology Infrastructure']
+    },
+    'workshop-session': {
+        title: 'Technical Workshop Leadership',
+        date: 'November 2024',
+        location: 'JSPM\'s JSCOP, Pune',
+        category: 'Knowledge Sharing',
+        images: [
+            'assets/achievements/achievement11.jpg'
+        ],
+        problem: 'Conduct comprehensive technical workshops to share knowledge and enhance learning experience for fellow students and professionals.',
+        implementation: [
+            'Designed comprehensive workshop curriculum on emerging technologies',
+            'Created hands-on coding exercises and practical demonstrations',
+            'Developed interactive learning materials and resources',
+            'Facilitated group discussions and problem-solving sessions',
+            'Provided personalized guidance and mentorship to participants',
+            'Collected feedback and continuously improved workshop content'
+        ],
+        impact: 'Successfully conducted multiple technical workshops with high participant satisfaction, contributing to skill development of 50+ individuals.',
+        technologies: ['Teaching Methodologies', 'Workshop Design', 'Technical Training', 'Mentorship', 'Educational Technology']
+    },
+    'computer-engineering': {
+        title: 'Computer Engineering Academic Excellence',
+        date: 'Ongoing',
+        location: 'JSPM\'s JSCOP, Pune',
+        category: 'Academic Achievement',
+        images: [
+            'assets/achievements/achievement12.jpg'
+        ],
+        problem: 'Excel in computer engineering studies while balancing theoretical knowledge with practical application and industry relevance.',
+        implementation: [
+            'Maintained consistently high academic performance across all subjects',
+            'Completed challenging projects in data structures, algorithms, and AI',
+            'Participated in coding competitions and technical events',
+            'Engaged in research projects and academic publications',
+            'Balanced coursework with internships and practical experience',
+            'Developed strong foundation in computer science fundamentals'
+        ],
+        impact: 'Achieved academic excellence with strong GPA while gaining practical experience through internships and projects, preparing for successful career in technology.',
+        technologies: ['Data Structures', 'Algorithms', 'Software Engineering', 'Database Systems', 'Computer Networks', 'AI/ML']
+    }
+};
+
+// Achievement Modal Functionality
+function initializeAchievementModal() {
+    const modal = document.getElementById('achievementModal');
+    const modalOverlay = document.getElementById('modalOverlay');
+    const modalClose = document.getElementById('modalClose');
+    const achievementItems = document.querySelectorAll('.achievement-item[data-achievement]');
+    
+    // Add click listeners to achievement items
+    achievementItems.forEach(item => {
+        item.addEventListener('click', () => {
+            const achievementId = item.getAttribute('data-achievement');
+            if (achievementData[achievementId]) {
+                openAchievementModal(achievementId);
+            }
+        });
+    });
+    
+    // Close modal functionality
+    function closeModal() {
+        modal.classList.remove('active');
+        document.body.style.overflow = '';
+    }
+    
+    modalClose.addEventListener('click', closeModal);
+    modalOverlay.addEventListener('click', closeModal);
+    
+    // Close on Escape key
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && modal.classList.contains('active')) {
+            closeModal();
+        }
+    });
+}
+
+function openAchievementModal(achievementId) {
+    const modal = document.getElementById('achievementModal');
+    const data = achievementData[achievementId];
+    
+    if (!data) return;
+    
+    // Populate modal content
+    document.getElementById('modalTitle').textContent = data.title;
+    document.getElementById('modalDate').textContent = data.date;
+    document.getElementById('modalLocation').textContent = data.location;
+    document.getElementById('modalCategory').textContent = data.category;
+    document.getElementById('modalProblem').textContent = data.problem;
+    document.getElementById('modalImpact').textContent = data.impact;
+    
+    // Set main image
+    const mainImage = document.getElementById('modalMainImage');
+    mainImage.src = `static/${data.images[0]}`;
+    mainImage.alt = data.title;
+    
+    // Create thumbnails
+    const thumbnailContainer = document.getElementById('modalThumbnails');
+    thumbnailContainer.innerHTML = '';
+    
+    if (data.images.length > 1) {
+        data.images.forEach((imagePath, index) => {
+            const thumbnail = document.createElement('div');
+            thumbnail.className = `modal-thumbnail ${index === 0 ? 'active' : ''}`;
+            thumbnail.innerHTML = `<img src="static/${imagePath}" alt="${data.title} ${index + 1}">`;
+            
+            thumbnail.addEventListener('click', () => {
+                mainImage.src = `static/${imagePath}`;
+                thumbnailContainer.querySelectorAll('.modal-thumbnail').forEach(t => t.classList.remove('active'));
+                thumbnail.classList.add('active');
+            });
+            
+            thumbnailContainer.appendChild(thumbnail);
+        });
+    }
+    
+    // Create implementation list
+    const implementationContainer = document.getElementById('modalImplementation');
+    if (Array.isArray(data.implementation)) {
+        implementationContainer.innerHTML = '<ul>' + 
+            data.implementation.map(item => `<li>${item}</li>`).join('') + 
+            '</ul>';
+    } else {
+        implementationContainer.innerHTML = `<p>${data.implementation}</p>`;
+    }
+    
+    // Create technology badges
+    const techStackContainer = document.getElementById('modalTechStack');
+    techStackContainer.innerHTML = data.technologies.map(tech => 
+        `<span class="tech-badge">${tech}</span>`
+    ).join('');
+    
+    // Show modal
+    modal.classList.add('active');
+    document.body.style.overflow = 'hidden';
 }
 
 // Smooth scrolling

@@ -127,84 +127,84 @@
             <div class="achievement-gallery">
                 <div class="gallery-container">
                     <div class="gallery-track" id="achievementTrack">
-                        <div class="achievement-item">
+                        <div class="achievement-item" data-achievement="faculty-induction">
                             <img src="{{ url_for('static', filename='assets/achievements/achievement1.jpg') }}" alt="Faculty Induction Program">
                             <div class="achievement-overlay">
                                 <h4>Faculty Induction Program</h4>
                                 <p>Recognition at JSPM's JSCOP</p>
                             </div>
                         </div>
-                        <div class="achievement-item">
+                        <div class="achievement-item" data-achievement="kpit-sparkle">
                             <img src="{{ url_for('static', filename='assets/achievements/achievement2.jpg') }}" alt="KPIT Sparkle Finalist">
                             <div class="achievement-overlay">
                                 <h4>KPIT Sparkle 2025</h4>
                                 <p>Top 6 Finalist - Team Vanguardians</p>
                             </div>
                         </div>
-                        <div class="achievement-item">
+                        <div class="achievement-item" data-achievement="teaching-excellence">
                             <img src="{{ url_for('static', filename='assets/achievements/achievement3.jpg') }}" alt="Teaching Excellence">
                             <div class="achievement-overlay">
                                 <h4>Teaching Excellence</h4>
                                 <p>Mentoring and Education</p>
                             </div>
                         </div>
-                        <div class="achievement-item">
+                        <div class="achievement-item" data-achievement="academic-presentation">
                             <img src="{{ url_for('static', filename='assets/achievements/achievement4.jpg') }}" alt="Academic Presentation">
                             <div class="achievement-overlay">
                                 <h4>Academic Presentation</h4>
                                 <p>Research and Innovation</p>
                             </div>
                         </div>
-                        <div class="achievement-item">
+                        <div class="achievement-item" data-achievement="tech-innovation">
                             <img src="{{ url_for('static', filename='assets/achievements/achievement5.jpg') }}" alt="Tech Innovation">
                             <div class="achievement-overlay">
                                 <h4>Tech Innovation</h4>
                                 <p>Leading Technology Solutions</p>
                             </div>
                         </div>
-                        <div class="achievement-item">
+                        <div class="achievement-item" data-achievement="kpit-team">
                             <img src="{{ url_for('static', filename='assets/achievements/achievement6.jpg') }}" alt="KPIT Sparkle Team">
                             <div class="achievement-overlay">
                                 <h4>KPIT Sparkle Team</h4>
                                 <p>Collaborative Innovation</p>
                             </div>
                         </div>
-                        <div class="achievement-item">
+                        <div class="achievement-item" data-achievement="kpit-recognition">
                             <img src="{{ url_for('static', filename='assets/achievements/achievement7.jpg') }}" alt="KPIT Recognition">
                             <div class="achievement-overlay">
                                 <h4>KPIT Recognition</h4>
                                 <p>Individual Achievement</p>
                             </div>
                         </div>
-                        <div class="achievement-item">
+                        <div class="achievement-item" data-achievement="mobility-innovation">
                             <img src="{{ url_for('static', filename='assets/achievements/achievement8.jpg') }}" alt="Mobility Innovation">
                             <div class="achievement-overlay">
                                 <h4>Reimagining Mobility</h4>
                                 <p>Future Transportation Solutions</p>
                             </div>
                         </div>
-                        <div class="achievement-item">
+                        <div class="achievement-item" data-achievement="executive-interaction">
                             <img src="{{ url_for('static', filename='assets/achievements/achievement9.jpg') }}" alt="Executive Interaction">
                             <div class="achievement-overlay">
                                 <h4>Executive Interaction</h4>
                                 <p>Industry Leadership Meeting</p>
                             </div>
                         </div>
-                        <div class="achievement-item">
+                        <div class="achievement-item" data-achievement="kpit-campus">
                             <img src="{{ url_for('static', filename='assets/achievements/achievement10.jpg') }}" alt="KPIT Campus">
                             <div class="achievement-overlay">
                                 <h4>KPIT Campus</h4>
                                 <p>Innovation Hub Experience</p>
                             </div>
                         </div>
-                        <div class="achievement-item">
+                        <div class="achievement-item" data-achievement="workshop-session">
                             <img src="{{ url_for('static', filename='assets/achievements/achievement11.jpg') }}" alt="Workshop Session">
                             <div class="achievement-overlay">
                                 <h4>Workshop Session</h4>
                                 <p>Knowledge Sharing</p>
                             </div>
                         </div>
-                        <div class="achievement-item">
+                        <div class="achievement-item" data-achievement="computer-engineering">
                             <img src="{{ url_for('static', filename='assets/achievements/achievement12.jpg') }}" alt="Computer Engineering">
                             <div class="achievement-overlay">
                                 <h4>Computer Engineering</h4>
@@ -897,6 +897,68 @@
 
     <!-- Scripts -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/particles.js/2.0.0/particles.min.js"></script>
+    <script src="{{ url_for('static', filename='js/particles.js') }}"></script>
+    <!-- Achievement Modal -->
+    <div id="achievementModal" class="achievement-modal">
+        <div class="modal-overlay" id="modalOverlay"></div>
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 id="modalTitle">Achievement Title</h2>
+                <button class="modal-close" id="modalClose">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="modal-gallery">
+                    <div class="modal-main-image">
+                        <img id="modalMainImage" src="" alt="">
+                    </div>
+                    <div class="modal-thumbnails" id="modalThumbnails">
+                        <!-- Thumbnail images will be inserted here -->
+                    </div>
+                </div>
+                <div class="modal-details">
+                    <div class="achievement-meta">
+                        <div class="meta-item">
+                            <i class="fas fa-calendar"></i>
+                            <span id="modalDate">Date</span>
+                        </div>
+                        <div class="meta-item">
+                            <i class="fas fa-map-marker-alt"></i>
+                            <span id="modalLocation">Location</span>
+                        </div>
+                        <div class="meta-item">
+                            <i class="fas fa-award"></i>
+                            <span id="modalCategory">Category</span>
+                        </div>
+                    </div>
+                    
+                    <div class="achievement-section">
+                        <h3><i class="fas fa-lightbulb"></i> Problem Statement</h3>
+                        <p id="modalProblem">Problem description will appear here</p>
+                    </div>
+                    
+                    <div class="achievement-section">
+                        <h3><i class="fas fa-cogs"></i> Implementation & Solution</h3>
+                        <div id="modalImplementation">Implementation details will appear here</div>
+                    </div>
+                    
+                    <div class="achievement-section">
+                        <h3><i class="fas fa-trophy"></i> Impact & Results</h3>
+                        <p id="modalImpact">Results and impact will appear here</p>
+                    </div>
+                    
+                    <div class="achievement-section">
+                        <h3><i class="fas fa-tools"></i> Technologies Used</h3>
+                        <div class="tech-stack" id="modalTechStack">
+                            <!-- Technology badges will be inserted here -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <script src="{{ url_for('static', filename='js/particles.js') }}"></script>
     <script src="{{ url_for('static', filename='js/typing.js') }}"></script>
     <script src="{{ url_for('static', filename='js/main.js') }}"></script>
