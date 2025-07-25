@@ -13,10 +13,10 @@ document.addEventListener('DOMContentLoaded', function() {
     initializeAchievementGallery();
     initializeAchievementModal();
     initializeProjectModal();
-    
+
     // Add smooth scrolling
     addSmoothScrolling();
-    
+
     // Initialize parallax effects
     initializeParallax();
 });
@@ -26,11 +26,11 @@ function initializeTheme() {
     const themeToggle = document.getElementById('themeToggle');
     const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
     const savedTheme = localStorage.getItem('theme');
-    
+
     // Set initial theme
     const initialTheme = savedTheme || (prefersDark ? 'dark' : 'light');
     setTheme(initialTheme);
-    
+
     // Theme toggle functionality
     if (themeToggle) {
         themeToggle.addEventListener('click', () => {
@@ -39,11 +39,11 @@ function initializeTheme() {
             setTheme(newTheme);
         });
     }
-    
+
     function setTheme(theme) {
         document.documentElement.setAttribute('data-theme', theme);
         localStorage.setItem('theme', theme);
-        
+
         // Update theme toggle icon
         if (themeToggle) {
             const icon = themeToggle.querySelector('i');
@@ -51,7 +51,7 @@ function initializeTheme() {
                 icon.className = theme === 'dark' ? 'fas fa-sun' : 'fas fa-moon';
             }
         }
-        
+
         // Dispatch theme change event
         document.dispatchEvent(new CustomEvent('themeChanged', { detail: { theme } }));
     }
@@ -63,13 +63,13 @@ function initializeNavigation() {
     const mobileMenuBtn = document.getElementById('mobileMenuBtn');
     const navMenu = document.querySelector('.nav-menu');
     const navLinks = document.querySelectorAll('.nav-link');
-    
+
     // Navbar scroll effect
     let lastScrollY = window.scrollY;
-    
+
     window.addEventListener('scroll', () => {
         const currentScrollY = window.scrollY;
-        
+
         if (navbar) {
             if (currentScrollY > 100) {
                 navbar.style.background = 'rgba(10, 10, 15, 0.98)';
@@ -78,7 +78,7 @@ function initializeNavigation() {
                 navbar.style.background = 'rgba(10, 10, 15, 0.95)';
                 navbar.style.backdropFilter = 'blur(20px)';
             }
-            
+
             // Hide/show navbar on scroll
             if (currentScrollY > lastScrollY && currentScrollY > 500) {
                 navbar.style.transform = 'translateY(-100%)';
@@ -86,10 +86,10 @@ function initializeNavigation() {
                 navbar.style.transform = 'translateY(0)';
             }
         }
-        
+
         lastScrollY = currentScrollY;
     });
-    
+
     // Mobile menu toggle
     if (mobileMenuBtn && navMenu) {
         mobileMenuBtn.addEventListener('click', () => {
@@ -97,18 +97,18 @@ function initializeNavigation() {
             mobileMenuBtn.classList.toggle('active');
         });
     }
-    
+
     // Active navigation highlighting
     const sections = document.querySelectorAll('section[id]');
-    
+
     function updateActiveNav() {
         const scrollPos = window.scrollY + 100;
-        
+
         sections.forEach(section => {
             const sectionTop = section.offsetTop;
             const sectionHeight = section.offsetHeight;
             const sectionId = section.getAttribute('id');
-            
+
             if (scrollPos >= sectionTop && scrollPos < sectionTop + sectionHeight) {
                 navLinks.forEach(link => {
                     link.classList.remove('active');
@@ -119,7 +119,7 @@ function initializeNavigation() {
             }
         });
     }
-    
+
     window.addEventListener('scroll', throttle(updateActiveNav, 100));
 }
 
@@ -127,45 +127,45 @@ function initializeNavigation() {
 function initializeCursor() {
     const cursor = document.querySelector('.cursor');
     const cursorTrail = document.querySelector('.cursor-trail');
-    
+
     if (!cursor || !cursorTrail) return;
-    
+
     let mouseX = 0, mouseY = 0;
     let trailX = 0, trailY = 0;
-    
+
     // Update mouse position
     document.addEventListener('mousemove', (e) => {
         mouseX = e.clientX;
         mouseY = e.clientY;
     });
-    
+
     // Animate cursor
     function animateCursor() {
         // Main cursor follows mouse immediately
         cursor.style.left = mouseX + 'px';
         cursor.style.top = mouseY + 'px';
-        
+
         // Trail follows with delay
         trailX += (mouseX - trailX) * 0.1;
         trailY += (mouseY - trailY) * 0.1;
-        
+
         cursorTrail.style.left = trailX + 'px';
         cursorTrail.style.top = trailY + 'px';
-        
+
         requestAnimationFrame(animateCursor);
     }
-    
+
     animateCursor();
-    
+
     // Cursor interactions
     const interactiveElements = document.querySelectorAll('a, button, .btn, .project-card, .experience-card');
-    
+
     interactiveElements.forEach(element => {
         element.addEventListener('mouseenter', () => {
             cursor.style.transform = 'scale(1.5)';
             cursor.style.backgroundColor = 'var(--primary-color)';
         });
-        
+
         element.addEventListener('mouseleave', () => {
             cursor.style.transform = 'scale(1)';
             cursor.style.backgroundColor = 'transparent';
@@ -179,7 +179,7 @@ function initializeScrollAnimations() {
         threshold: 0.1,
         rootMargin: '0px 0px -50px 0px'
     };
-    
+
     const observer = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
             if (entry.isIntersecting) {
@@ -187,7 +187,7 @@ function initializeScrollAnimations() {
             }
         });
     }, observerOptions);
-    
+
     // Observe elements for animation
     const animateElements = document.querySelectorAll(`
         .timeline-item, 
@@ -197,11 +197,11 @@ function initializeScrollAnimations() {
         .skill-category,
         .about-stats .stat-item
     `);
-    
+
     animateElements.forEach(element => {
         observer.observe(element);
     });
-    
+
     // Add CSS for animations
     const style = document.createElement('style');
     style.textContent = `
@@ -215,20 +215,20 @@ function initializeScrollAnimations() {
             transform: translateY(30px);
             transition: opacity 0.6s ease, transform 0.6s ease;
         }
-        
+
         .animate-in {
             opacity: 1 !important;
             transform: translateY(0) !important;
         }
-        
+
         .timeline-item:nth-child(even) {
             transform: translateY(30px) translateX(30px);
         }
-        
+
         .timeline-item:nth-child(odd) {
             transform: translateY(30px) translateX(-30px);
         }
-        
+
         .timeline-item.animate-in {
             transform: translateY(0) translateX(0) !important;
         }
@@ -239,7 +239,7 @@ function initializeScrollAnimations() {
 // Skill bars animation
 function initializeSkillBars() {
     const skillBars = document.querySelectorAll('.skill-progress');
-    
+
     const skillObserver = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
             if (entry.isIntersecting) {
@@ -249,7 +249,7 @@ function initializeSkillBars() {
             }
         });
     }, { threshold: 0.5 });
-    
+
     skillBars.forEach(bar => {
         skillObserver.observe(bar);
     });
@@ -259,19 +259,19 @@ function initializeSkillBars() {
 function initializeProjectFilters() {
     const filterBtns = document.querySelectorAll('.filter-btn');
     const projectCards = document.querySelectorAll('.project-card');
-    
+
     filterBtns.forEach(btn => {
         btn.addEventListener('click', () => {
             const filter = btn.getAttribute('data-filter');
-            
+
             // Update active button
             filterBtns.forEach(b => b.classList.remove('active'));
             btn.classList.add('active');
-            
+
             // Filter projects
             projectCards.forEach(card => {
                 const category = card.getAttribute('data-category');
-                
+
                 if (filter === 'all' || category === filter) {
                     card.style.display = 'block';
                     card.style.animation = 'fadeInUp 0.5s ease';
@@ -287,37 +287,37 @@ function initializeProjectFilters() {
 function initializeContactForm() {
     const form = document.getElementById('contactForm');
     const formMessage = document.getElementById('formMessage');
-    
+
     if (!form) return;
-    
+
     form.addEventListener('submit', async (e) => {
         e.preventDefault();
-        
+
         const formData = new FormData(form);
         const submitBtn = form.querySelector('.submit-btn');
         const btnText = submitBtn.querySelector('.btn-text');
-        
+
         // Update button state
         submitBtn.disabled = true;
         btnText.textContent = 'Sending...';
-        
+
         try {
             const response = await fetch('/contact', {
                 method: 'POST',
                 body: formData
             });
-            
+
             const result = await response.json();
-            
+
             // Show message
             formMessage.style.display = 'block';
             formMessage.className = `form-message ${result.success ? 'success' : 'error'}`;
             formMessage.textContent = result.message;
-            
+
             if (result.success) {
                 form.reset();
             }
-            
+
         } catch (error) {
             formMessage.style.display = 'block';
             formMessage.className = 'form-message error';
@@ -326,43 +326,43 @@ function initializeContactForm() {
             // Reset button state
             submitBtn.disabled = false;
             btnText.textContent = 'Send Message';
-            
+
             // Hide message after 5 seconds
             setTimeout(() => {
                 formMessage.style.display = 'none';
             }, 5000);
         }
     });
-    
+
     // Form validation
     const inputs = form.querySelectorAll('input, textarea');
     inputs.forEach(input => {
         input.addEventListener('blur', validateInput);
         input.addEventListener('input', clearValidation);
     });
-    
+
     function validateInput(e) {
         const input = e.target;
         const value = input.value.trim();
-        
+
         // Remove existing validation
         input.classList.remove('invalid');
-        
+
         // Validate based on input type
         let isValid = true;
-        
+
         if (input.hasAttribute('required') && !value) {
             isValid = false;
         } else if (input.type === 'email' && value) {
             const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
             isValid = emailRegex.test(value);
         }
-        
+
         if (!isValid) {
             input.classList.add('invalid');
         }
     }
-    
+
     function clearValidation(e) {
         e.target.classList.remove('invalid');
     }
@@ -371,7 +371,7 @@ function initializeContactForm() {
 // Counter animations
 function initializeCounters() {
     const counters = document.querySelectorAll('.stat-number[data-count]');
-    
+
     const counterObserver = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
             if (entry.isIntersecting) {
@@ -380,17 +380,17 @@ function initializeCounters() {
             }
         });
     }, { threshold: 0.5 });
-    
+
     counters.forEach(counter => {
         counterObserver.observe(counter);
     });
-    
+
     function animateCounter(element) {
         const target = parseInt(element.getAttribute('data-count'));
         const duration = 2000; // 2 seconds
         const step = target / (duration / 16); // 60fps
         let current = 0;
-        
+
         const timer = setInterval(() => {
             current += step;
             if (current >= target) {
@@ -406,7 +406,7 @@ function initializeCounters() {
 // Preloader
 function initializePreloader() {
     const preloader = document.getElementById('preloader');
-    
+
     window.addEventListener('load', () => {
         if (preloader) {
             setTimeout(() => {
@@ -889,7 +889,7 @@ function initializeAchievementModal() {
     const modalOverlay = document.getElementById('modalOverlay');
     const modalClose = document.getElementById('modalClose');
     const timelineItems = document.querySelectorAll('.timeline-item[data-achievement]');
-    
+
     // Add click listeners to timeline achievement items
     timelineItems.forEach(item => {
         item.addEventListener('click', () => {
@@ -899,16 +899,16 @@ function initializeAchievementModal() {
             }
         });
     });
-    
+
     // Close modal functionality
     function closeModal() {
         modal.classList.remove('active');
         document.body.style.overflow = '';
     }
-    
+
     modalClose.addEventListener('click', closeModal);
     modalOverlay.addEventListener('click', closeModal);
-    
+
     // Close on Escape key
     document.addEventListener('keydown', (e) => {
         if (e.key === 'Escape' && modal.classList.contains('active')) {
@@ -920,9 +920,9 @@ function initializeAchievementModal() {
 function openAchievementModal(achievementId) {
     const modal = document.getElementById('achievementModal');
     const data = achievementData[achievementId];
-    
+
     if (!data) return;
-    
+
     // Populate modal content
     document.getElementById('modalTitle').textContent = data.title;
     document.getElementById('modalDate').textContent = data.date;
@@ -930,32 +930,32 @@ function openAchievementModal(achievementId) {
     document.getElementById('modalCategory').textContent = data.category;
     document.getElementById('modalProblem').textContent = data.problem;
     document.getElementById('modalImpact').textContent = data.impact;
-    
+
     // Set main image
     const mainImage = document.getElementById('modalMainImage');
     mainImage.src = `static/${data.images[0]}`;
     mainImage.alt = data.title;
-    
+
     // Create thumbnails
     const thumbnailContainer = document.getElementById('modalThumbnails');
     thumbnailContainer.innerHTML = '';
-    
+
     if (data.images.length > 1) {
         data.images.forEach((imagePath, index) => {
             const thumbnail = document.createElement('div');
             thumbnail.className = `modal-thumbnail ${index === 0 ? 'active' : ''}`;
             thumbnail.innerHTML = `<img src="static/${imagePath}" alt="${data.title} ${index + 1}">`;
-            
+
             thumbnail.addEventListener('click', () => {
                 mainImage.src = `static/${imagePath}`;
                 thumbnailContainer.querySelectorAll('.modal-thumbnail').forEach(t => t.classList.remove('active'));
                 thumbnail.classList.add('active');
             });
-            
+
             thumbnailContainer.appendChild(thumbnail);
         });
     }
-    
+
     // Create implementation list
     const implementationContainer = document.getElementById('modalImplementation');
     if (Array.isArray(data.implementation)) {
@@ -965,15 +965,18 @@ function openAchievementModal(achievementId) {
     } else {
         implementationContainer.innerHTML = `<p>${data.implementation}</p>`;
     }
-    
+
     // Create technology badges
     const techStackContainer = document.getElementById('modalTechStack');
     techStackContainer.innerHTML = data.technologies.map(tech => 
         `<span class="tech-badge">${tech}</span>`
     ).join('');
-    
+
     // Show modal
-    modal.classList.add('active');
+    modal.style.display = 'block';
+    setTimeout(() => {
+        modal.classList.add('active');
+    }, 10);
     document.body.style.overflow = 'hidden';
 }
 
@@ -987,7 +990,7 @@ function addSmoothScrolling() {
                 const headerOffset = 80;
                 const elementPosition = target.offsetTop;
                 const offsetPosition = elementPosition - headerOffset;
-                
+
                 window.scrollTo({
                     top: offsetPosition,
                     behavior: 'smooth'
@@ -1000,11 +1003,11 @@ function addSmoothScrolling() {
 // Parallax effects
 function initializeParallax() {
     const parallaxElements = document.querySelectorAll('.hero-image, .profile-glow');
-    
+
     window.addEventListener('scroll', throttle(() => {
         const scrolled = window.pageYOffset;
         const rate = scrolled * -0.5;
-        
+
         parallaxElements.forEach(element => {
             element.style.transform = `translateY(${rate}px)`;
         });
@@ -1048,7 +1051,7 @@ validationStyle.textContent = `
         border-color: var(--secondary-color) !important;
         box-shadow: 0 0 0 2px rgba(255, 107, 107, 0.2) !important;
     }
-    
+
     .form-group input.invalid + label,
     .form-group textarea.invalid + label {
         color: var(--secondary-color) !important;
@@ -1071,7 +1074,7 @@ function initializeProjectModal() {
     const modalOverlay = document.getElementById('projectModalOverlay');
     const modalClose = document.getElementById('projectModalClose');
     const projectCards = document.querySelectorAll('.project-card[data-project]');
-    
+
     // Add click listeners to project cards
     projectCards.forEach(card => {
         card.style.cursor = 'pointer';
@@ -1081,7 +1084,7 @@ function initializeProjectModal() {
                 openProjectModal(projectId);
             }
         });
-        
+
         // Add hover effect
         const projectContent = card.querySelector('.project-content');
         if (projectContent) {
@@ -1091,16 +1094,16 @@ function initializeProjectModal() {
             projectContent.appendChild(clickIndicator);
         }
     });
-    
+
     // Close modal functionality
     function closeProjectModal() {
         modal.classList.remove('active');
         document.body.style.overflow = '';
     }
-    
+
     modalClose.addEventListener('click', closeProjectModal);
     modalOverlay.addEventListener('click', closeProjectModal);
-    
+
     // Close on Escape key
     document.addEventListener('keydown', (e) => {
         if (e.key === 'Escape' && modal.classList.contains('active')) {
@@ -1112,9 +1115,9 @@ function initializeProjectModal() {
 function openProjectModal(projectId) {
     const modal = document.getElementById('projectModal');
     const data = projectData[projectId];
-    
+
     if (!data) return;
-    
+
     // Populate modal content
     document.getElementById('projectModalTitle').textContent = data.title;
     document.getElementById('projectModalCategory').textContent = data.category;
@@ -1122,10 +1125,10 @@ function openProjectModal(projectId) {
     document.getElementById('projectModalStatus').textContent = data.status;
     document.getElementById('projectModalProblem').textContent = data.problem;
     document.getElementById('projectModalImpact').textContent = data.impact;
-    
+
     // Set main metrics
     document.getElementById('projectModalAccuracy').textContent = data.accuracy || 'N/A';
-    
+
     // Set main image (placeholder since images might not exist)
     const mainImage = document.getElementById('projectModalMainImage');
     mainImage.src = `static/${data.images[0]}`;
@@ -1133,7 +1136,7 @@ function openProjectModal(projectId) {
     mainImage.onerror = function() {
         this.src = 'data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNDAwIiBoZWlnaHQ9IjMwMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cmVjdCB3aWR0aD0iNDAwIiBoZWlnaHQ9IjMwMCIgZmlsbD0iIzMzMzMzMyIvPjx0ZXh0IHg9IjUwJSIgeT0iNTAlIiBmb250LXNpemU9IjE4IiBmaWxsPSIjNjY2NjY2IiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBkeT0iMC4zZW0iPk5vIEltYWdlIEF2YWlsYWJsZTwvdGV4dD48L3N2Zz4=';
     };
-    
+
     // Create implementation list
     const implementationContainer = document.getElementById('projectModalImplementation');
     if (Array.isArray(data.implementation)) {
@@ -1143,20 +1146,20 @@ function openProjectModal(projectId) {
     } else {
         implementationContainer.innerHTML = `<p>${data.implementation}</p>`;
     }
-    
+
     // Create technology badges
     const techStackContainer = document.getElementById('projectModalTechStack');
     techStackContainer.innerHTML = data.technologies.map(tech => 
         `<span class="tech-badge">${tech}</span>`
     ).join('');
-    
+
     // Create metrics chart
     createMetricsChart(data.metrics);
-    
+
     // Add project links
     const linksContainer = document.getElementById('projectModalLinks');
     linksContainer.innerHTML = '';
-    
+
     if (data.githubUrl) {
         linksContainer.innerHTML += `
             <a href="${data.githubUrl}" target="_blank" class="project-modal-link">
@@ -1164,7 +1167,7 @@ function openProjectModal(projectId) {
             </a>
         `;
     }
-    
+
     if (data.liveUrl) {
         linksContainer.innerHTML += `
             <a href="${data.liveUrl}" target="_blank" class="project-modal-link">
@@ -1172,26 +1175,29 @@ function openProjectModal(projectId) {
             </a>
         `;
     }
-    
+
     // Show modal
-    modal.classList.add('active');
+    modal.style.display = 'block';
+    setTimeout(() => {
+        modal.classList.add('active');
+    }, 10);
     document.body.style.overflow = 'hidden';
 }
 
 function createMetricsChart(metrics) {
     const chartContainer = document.getElementById('metricsChart');
     chartContainer.innerHTML = '';
-    
+
     if (!metrics) return;
-    
+
     const metricsArray = Object.entries(metrics);
-    
+
     metricsArray.forEach(([key, value]) => {
         const metricItem = document.createElement('div');
         metricItem.className = 'metric-item';
-        
+
         const metricLabel = key.replace(/([A-Z])/g, ' $1').replace(/^./, str => str.toUpperCase());
-        
+
         metricItem.innerHTML = `
             <div class="metric-header">
                 <span class="metric-name">${metricLabel}</span>
@@ -1201,7 +1207,7 @@ function createMetricsChart(metrics) {
                 <div class="metric-progress" style="width: ${value}%"></div>
             </div>
         `;
-        
+
         chartContainer.appendChild(metricItem);
     });
 }
@@ -1209,16 +1215,16 @@ function createMetricsChart(metrics) {
 // Achievement Gallery - Infinite Auto Scroll
 function initializeAchievementGallery() {
     const track = document.getElementById('achievementTrack');
-    
+
     if (!track) return;
-    
+
     // Clone all items to create seamless infinite loop
     const items = Array.from(track.querySelectorAll('.achievement-item'));
     items.forEach(item => {
         const clone = item.cloneNode(true);
         track.appendChild(clone);
     });
-    
+
     // Add CSS class for infinite scroll animation
     track.classList.add('auto-scroll');
 }
@@ -1237,7 +1243,7 @@ document.addEventListener('DOMContentLoaded', function() {
             }
         });
     }
-    
+
     // Initialize achievement gallery
     initializeAchievementGallery();
 });

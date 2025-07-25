@@ -734,12 +734,14 @@ body {
     z-index: 10000;
     opacity: 0;
     visibility: hidden;
+    display: none;
     transition: all 0.3s ease;
 }
 
 .achievement-modal.active {
     opacity: 1;
     visibility: visible;
+    display: block;
 }
 
 .modal-overlay {
@@ -967,12 +969,14 @@ body {
     z-index: 10001;
     opacity: 0;
     visibility: hidden;
+    display: none;
     transition: all 0.3s ease;
 }
 
 .project-modal.active {
     opacity: 1;
     visibility: visible;
+    display: block;
 }
 
 .project-modal .modal-content {
