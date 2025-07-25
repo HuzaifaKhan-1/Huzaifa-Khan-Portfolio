@@ -12,6 +12,7 @@ document.addEventListener('DOMContentLoaded', function() {
     initializePreloader();
     initializeAchievementGallery();
     initializeAchievementModal();
+    initializeProjectModal();
     
     // Add smooth scrolling
     addSmoothScrolling();
@@ -417,6 +418,221 @@ function initializePreloader() {
         }
     });
 }
+
+// Project Modal Data
+const projectData = {
+    'codeheaven': {
+        title: 'CodeHeaven - Programming Learning Platform',
+        category: 'Web Development',
+        duration: '6 months',
+        status: 'Completed',
+        accuracy: '95%',
+        userSatisfaction: '4.8/5',
+        images: [
+            'assets/projects/codeheaven1.jpg',
+            'assets/projects/codeheaven2.jpg'
+        ],
+        problem: 'Create an interactive programming learning platform that provides real-time code editing, compilation, and step-by-step tutorials for multiple programming languages.',
+        implementation: [
+            'Developed responsive web interface with HTML5, CSS3, and modern JavaScript',
+            'Implemented real-time code editor with syntax highlighting using CodeMirror',
+            'Created interactive tutorial system with progressive difficulty levels',
+            'Built code compilation backend supporting C++, Python, and JavaScript',
+            'Integrated user progress tracking and achievement system',
+            'Implemented responsive design for mobile and desktop compatibility'
+        ],
+        impact: 'Successfully launched platform serving 500+ active learners with 95% completion rate for beginner courses and 4.8/5 user satisfaction rating.',
+        technologies: ['HTML5', 'CSS3', 'JavaScript', 'CodeMirror', 'Node.js', 'Express.js'],
+        metrics: {
+            codeAccuracy: 95,
+            userEngagement: 87,
+            completionRate: 78,
+            performance: 92
+        },
+        githubUrl: 'https://github.com/huzaifakamaalkhan/codeheaven',
+        liveUrl: 'https://codeheaven-demo.com'
+    },
+    'heart-disease': {
+        title: 'Heart Disease Prediction System',
+        category: 'Machine Learning',
+        duration: '4 months',
+        status: 'Completed',
+        accuracy: '94.2%',
+        precision: '93.7%',
+        images: [
+            'assets/projects/heart1.jpg',
+            'assets/projects/heart2.jpg'
+        ],
+        problem: 'Develop a machine learning model to predict heart disease risk using patient medical data, helping doctors make informed decisions for early intervention.',
+        implementation: [
+            'Collected and preprocessed heart disease dataset with 14 key features',
+            'Applied data cleaning and feature engineering techniques',
+            'Implemented multiple ML algorithms: Random Forest, SVM, and Logistic Regression',
+            'Created web interface for easy patient data input and prediction',
+            'Integrated model comparison and performance analysis dashboard',
+            'Built visualization tools for feature importance and prediction confidence'
+        ],
+        impact: 'Achieved 94.2% accuracy in heart disease prediction, potentially helping early diagnosis for thousands of patients with reliable risk assessment.',
+        technologies: ['Python', 'scikit-learn', 'Pandas', 'NumPy', 'Matplotlib', 'Flask', 'HTML/CSS'],
+        metrics: {
+            accuracy: 94.2,
+            precision: 93.7,
+            recall: 92.1,
+            f1Score: 92.9
+        },
+        githubUrl: 'https://github.com/huzaifakamaalkhan/heart-disease-prediction'
+    },
+    'ai-fitness': {
+        title: 'AI Fitness Tracker',
+        category: 'AI Application',
+        duration: '3 months',
+        status: 'Completed',
+        accuracy: '98%',
+        realTimeProcessing: '< 100ms',
+        images: [
+            'assets/projects/fitness1.jpg',
+            'assets/projects/fitness2.jpg'
+        ],
+        problem: 'Create an AI-powered fitness tracking application that accurately predicts calories burned based on user activities, biometric data, and exercise patterns.',
+        implementation: [
+            'Developed AI model using ensemble learning with XGBoost and Random Forest',
+            'Integrated real-time data processing for continuous activity monitoring',
+            'Built Streamlit web application with interactive dashboard',
+            'Implemented user profile system with personalized recommendations',
+            'Created data visualization for workout analytics and progress tracking',
+            'Added integration with wearable devices for automated data collection'
+        ],
+        impact: 'Achieved 98% accuracy in calorie prediction, helping users optimize their fitness routines with personalized insights and achieving fitness goals 40% faster.',
+        technologies: ['Python', 'XGBoost', 'Random Forest', 'Streamlit', 'Pandas', 'Plotly', 'scikit-learn'],
+        metrics: {
+            accuracy: 98,
+            processingSpeed: 95,
+            userRetention: 85,
+            dataProcessing: 99
+        },
+        githubUrl: 'https://github.com/huzaifakamaalkhan/ai-fitness-tracker'
+    },
+    'tripgenie': {
+        title: 'TripGenie - AI Travel Planner',
+        category: 'Web Development',
+        duration: '5 months',
+        status: 'Completed',
+        accuracy: '92%',
+        recommendations: '10K+ generated',
+        images: [
+            'assets/projects/trip1.jpg',
+            'assets/projects/trip2.jpg'
+        ],
+        problem: 'Design an AI-powered travel itinerary planner that creates personalized travel recommendations based on user preferences, budget, and travel history.',
+        implementation: [
+            'Built responsive web application with modern JavaScript and CSS Grid',
+            'Integrated multiple travel APIs for real-time data on flights, hotels, and attractions',
+            'Developed recommendation algorithm using collaborative and content-based filtering',
+            'Created interactive map integration for visual itinerary planning',
+            'Implemented user review system and social sharing features',
+            'Added budget optimization and expense tracking functionality'
+        ],
+        impact: 'Generated 10,000+ personalized travel itineraries with 92% user approval rating, helping travelers save 60% planning time and discover unique destinations.',
+        technologies: ['HTML5', 'CSS3', 'JavaScript', 'Google Maps API', 'Travel APIs', 'Chart.js'],
+        metrics: {
+            recommendationAccuracy: 92,
+            userSatisfaction: 89,
+            planningEfficiency: 88,
+            apiIntegration: 95
+        },
+        liveUrl: 'https://tripgenie-demo.com'
+    },
+    'pomegranate-disease': {
+        title: 'Pomegranate Disease Detection',
+        category: 'Machine Learning',
+        duration: '6 months',
+        status: 'Completed',
+        accuracy: '94.15%',
+        processingTime: '2.3s per image',
+        images: [
+            'assets/projects/pomegranate1.jpg',
+            'assets/projects/pomegranate2.jpg'
+        ],
+        problem: 'Develop a computer vision system to detect diseases in pomegranate plants using image analysis, helping farmers identify and treat plant diseases early.',
+        implementation: [
+            'Collected and annotated dataset of 5000+ pomegranate plant images',
+            'Implemented hybrid CNN architecture combining VGG16 and ResNet50',
+            'Applied advanced data augmentation techniques for robust model training',
+            'Developed web-based interface for easy image upload and analysis',
+            'Created detailed disease classification with treatment recommendations',
+            'Integrated confidence scoring and uncertainty quantification'
+        ],
+        impact: 'Achieved 94.15% accuracy in disease detection, potentially saving crop yields for farmers and reducing agricultural losses by early disease identification.',
+        technologies: ['Python', 'TensorFlow', 'Keras', 'VGG16', 'ResNet50', 'OpenCV', 'Flask'],
+        metrics: {
+            accuracy: 94.15,
+            precision: 93.8,
+            recall: 94.5,
+            processingSpeed: 87
+        },
+        githubUrl: 'https://github.com/huzaifakamaalkhan/pomegranate-disease-detection'
+    },
+    'grapes-disease': {
+        title: 'Grapes Disease Prediction',
+        category: 'Machine Learning',
+        duration: '4 months',
+        status: 'Completed',
+        accuracy: '97.94%',
+        diseaseTypes: '8 classifications',
+        images: [
+            'assets/projects/grapes1.jpg',
+            'assets/projects/grapes2.jpg'
+        ],
+        problem: 'Create an advanced machine learning system for predicting grape diseases using CNN and Linear Discriminant Analysis for precise agricultural diagnostics.',
+        implementation: [
+            'Developed hybrid model combining CNN feature extraction with LDA classification',
+            'Implemented advanced preprocessing pipeline with noise reduction',
+            'Created multi-class classification system for 8 different grape diseases',
+            'Built real-time prediction system with mobile-responsive interface',
+            'Integrated GPS-based disease mapping for regional analysis',
+            'Added automated report generation with treatment suggestions'
+        ],
+        impact: 'Achieved 97.94% accuracy in grape disease prediction, highest in agricultural AI applications, helping vineyards prevent crop losses worth millions.',
+        technologies: ['Python', 'CNN', 'Linear Discriminant Analysis', 'TensorFlow', 'scikit-learn', 'OpenCV'],
+        metrics: {
+            accuracy: 97.94,
+            precision: 97.2,
+            recall: 98.1,
+            f1Score: 97.6
+        },
+        githubUrl: 'https://github.com/huzaifakamaalkhan/grapes-disease-prediction'
+    },
+    'college-chatbot': {
+        title: 'College Admission Chatbot',
+        category: 'AI Application',
+        duration: '3 months',
+        status: 'Completed',
+        accuracy: '96%',
+        responseTime: '< 2s',
+        images: [
+            'assets/projects/chatbot1.jpg',
+            'assets/projects/chatbot2.jpg'
+        ],
+        problem: 'Build an intelligent chatbot using IBM WatsonX to handle college admission queries, providing instant and accurate responses to prospective students.',
+        implementation: [
+            'Integrated IBM WatsonX Assistant for natural language processing',
+            'Created comprehensive knowledge base with admission procedures and FAQs',
+            'Developed multi-intent recognition for complex query handling',
+            'Built context-aware conversation flow with memory management',
+            'Implemented sentiment analysis for student satisfaction tracking',
+            'Added multilingual support for diverse student demographics'
+        ],
+        impact: 'Handles 96% of admission queries accurately, reducing admission office workload by 70% and providing 24/7 student support with instant responses.',
+        technologies: ['IBM WatsonX', 'Natural Language Processing', 'JavaScript', 'HTML/CSS', 'REST APIs'],
+        metrics: {
+            queryAccuracy: 96,
+            responseTime: 98,
+            userSatisfaction: 91,
+            resolutionRate: 89
+        },
+        githubUrl: 'https://github.com/huzaifakamaalkhan/college-chatbot'
+    }
+};
 
 // Achievement Modal Data
 const achievementData = {
@@ -846,6 +1062,147 @@ if ('requestIdleCallback' in window) {
     requestIdleCallback(() => {
         // Initialize non-critical features
         console.log('Portfolio loaded successfully');
+    });
+}
+
+// Project Modal Functionality
+function initializeProjectModal() {
+    const modal = document.getElementById('projectModal');
+    const modalOverlay = document.getElementById('projectModalOverlay');
+    const modalClose = document.getElementById('projectModalClose');
+    const projectCards = document.querySelectorAll('.project-card[data-project]');
+    
+    // Add click listeners to project cards
+    projectCards.forEach(card => {
+        card.style.cursor = 'pointer';
+        card.addEventListener('click', () => {
+            const projectId = card.getAttribute('data-project');
+            if (projectData[projectId]) {
+                openProjectModal(projectId);
+            }
+        });
+        
+        // Add hover effect
+        const projectContent = card.querySelector('.project-content');
+        if (projectContent) {
+            const clickIndicator = document.createElement('div');
+            clickIndicator.className = 'project-click-indicator';
+            clickIndicator.innerHTML = '<i class="fas fa-info-circle"></i> Click for details';
+            projectContent.appendChild(clickIndicator);
+        }
+    });
+    
+    // Close modal functionality
+    function closeProjectModal() {
+        modal.classList.remove('active');
+        document.body.style.overflow = '';
+    }
+    
+    modalClose.addEventListener('click', closeProjectModal);
+    modalOverlay.addEventListener('click', closeProjectModal);
+    
+    // Close on Escape key
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && modal.classList.contains('active')) {
+            closeProjectModal();
+        }
+    });
+}
+
+function openProjectModal(projectId) {
+    const modal = document.getElementById('projectModal');
+    const data = projectData[projectId];
+    
+    if (!data) return;
+    
+    // Populate modal content
+    document.getElementById('projectModalTitle').textContent = data.title;
+    document.getElementById('projectModalCategory').textContent = data.category;
+    document.getElementById('projectModalDuration').textContent = data.duration;
+    document.getElementById('projectModalStatus').textContent = data.status;
+    document.getElementById('projectModalProblem').textContent = data.problem;
+    document.getElementById('projectModalImpact').textContent = data.impact;
+    
+    // Set main metrics
+    document.getElementById('projectModalAccuracy').textContent = data.accuracy || 'N/A';
+    
+    // Set main image (placeholder since images might not exist)
+    const mainImage = document.getElementById('projectModalMainImage');
+    mainImage.src = `static/${data.images[0]}`;
+    mainImage.alt = data.title;
+    mainImage.onerror = function() {
+        this.src = 'data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNDAwIiBoZWlnaHQ9IjMwMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cmVjdCB3aWR0aD0iNDAwIiBoZWlnaHQ9IjMwMCIgZmlsbD0iIzMzMzMzMyIvPjx0ZXh0IHg9IjUwJSIgeT0iNTAlIiBmb250LXNpemU9IjE4IiBmaWxsPSIjNjY2NjY2IiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBkeT0iMC4zZW0iPk5vIEltYWdlIEF2YWlsYWJsZTwvdGV4dD48L3N2Zz4=';
+    };
+    
+    // Create implementation list
+    const implementationContainer = document.getElementById('projectModalImplementation');
+    if (Array.isArray(data.implementation)) {
+        implementationContainer.innerHTML = '<ul>' + 
+            data.implementation.map(item => `<li>${item}</li>`).join('') + 
+            '</ul>';
+    } else {
+        implementationContainer.innerHTML = `<p>${data.implementation}</p>`;
+    }
+    
+    // Create technology badges
+    const techStackContainer = document.getElementById('projectModalTechStack');
+    techStackContainer.innerHTML = data.technologies.map(tech => 
+        `<span class="tech-badge">${tech}</span>`
+    ).join('');
+    
+    // Create metrics chart
+    createMetricsChart(data.metrics);
+    
+    // Add project links
+    const linksContainer = document.getElementById('projectModalLinks');
+    linksContainer.innerHTML = '';
+    
+    if (data.githubUrl) {
+        linksContainer.innerHTML += `
+            <a href="${data.githubUrl}" target="_blank" class="project-modal-link">
+                <i class="fab fa-github"></i> View on GitHub
+            </a>
+        `;
+    }
+    
+    if (data.liveUrl) {
+        linksContainer.innerHTML += `
+            <a href="${data.liveUrl}" target="_blank" class="project-modal-link">
+                <i class="fas fa-external-link-alt"></i> Live Demo
+            </a>
+        `;
+    }
+    
+    // Show modal
+    modal.classList.add('active');
+    document.body.style.overflow = 'hidden';
+}
+
+function createMetricsChart(metrics) {
+    const chartContainer = document.getElementById('metricsChart');
+    chartContainer.innerHTML = '';
+    
+    if (!metrics) return;
+    
+    const metricsArray = Object.entries(metrics);
+    
+    metricsArray.forEach(([key, value]) => {
+        const metricItem = document.createElement('div');
+        metricItem.className = 'metric-item';
+        
+        const metricLabel = key.replace(/([A-Z])/g, ' $1').replace(/^./, str => str.toUpperCase());
+        
+        metricItem.innerHTML = `
+            <div class="metric-header">
+                <span class="metric-name">${metricLabel}</span>
+                <span class="metric-value">${value}%</span>
+            </div>
+            <div class="metric-bar">
+                <div class="metric-progress" style="width: ${value}%"></div>
+            </div>
+        `;
+        
+        chartContainer.appendChild(metricItem);
     });
 }
 

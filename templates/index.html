@@ -428,7 +428,7 @@
                 <button class="filter-btn" data-filter="ai">AI Applications</button>
             </div>
             <div class="projects-grid">
-                <div class="project-card" data-category="web">
+                <div class="project-card" data-category="web" data-project="codeheaven">
                     <div class="project-image">
                         <i class="fas fa-code"></i>
                     </div>
@@ -452,7 +452,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="project-card" data-category="ml">
+                <div class="project-card" data-category="ml" data-project="heart-disease">
                     <div class="project-image">
                         <i class="fas fa-heartbeat"></i>
                     </div>
@@ -472,7 +472,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="project-card" data-category="ai">
+                <div class="project-card" data-category="ai" data-project="ai-fitness">
                     <div class="project-image">
                         <i class="fas fa-dumbbell"></i>
                     </div>
@@ -492,7 +492,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="project-card" data-category="web">
+                <div class="project-card" data-category="web" data-project="tripgenie">
                     <div class="project-image">
                         <i class="fas fa-map-marked-alt"></i>
                     </div>
@@ -512,7 +512,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="project-card" data-category="ml">
+                <div class="project-card" data-category="ml" data-project="pomegranate-disease">
                     <div class="project-image">
                         <i class="fas fa-seedling"></i>
                     </div>
@@ -532,7 +532,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="project-card" data-category="ml">
+                <div class="project-card" data-category="ml" data-project="grapes-disease">
                     <div class="project-image">
                         <i class="fas fa-grape-cluster"></i>
                     </div>
@@ -552,7 +552,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="project-card" data-category="ai">
+                <div class="project-card" data-category="ai" data-project="college-chatbot">
                     <div class="project-image">
                         <i class="fas fa-robot"></i>
                     </div>
@@ -903,8 +903,87 @@
     <!-- Scripts -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/particles.js/2.0.0/particles.min.js"></script>
     <script src="{{ url_for('static', filename='js/particles.js') }}"></script>
+    <!-- Project Modal -->
+    <div id="projectModal" class="project-modal">
+        <div class="modal-overlay" id="projectModalOverlay"></div>
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 id="projectModalTitle">Project Title</h2>
+                <button class="modal-close" id="projectModalClose">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="modal-gallery">
+                    <div class="modal-main-image">
+                        <img id="projectModalMainImage" src="" alt="">
+                    </div>
+                    <div class="project-metrics-highlight">
+                        <div class="highlight-metric">
+                            <i class="fas fa-bullseye"></i>
+                            <span class="metric-label">Accuracy</span>
+                            <span class="metric-value" id="projectModalAccuracy">N/A</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-details">
+                    <div class="project-meta">
+                        <div class="meta-item">
+                            <i class="fas fa-tag"></i>
+                            <span id="projectModalCategory">Category</span>
+                        </div>
+                        <div class="meta-item">
+                            <i class="fas fa-clock"></i>
+                            <span id="projectModalDuration">Duration</span>
+                        </div>
+                        <div class="meta-item">
+                            <i class="fas fa-check-circle"></i>
+                            <span id="projectModalStatus">Status</span>
+                        </div>
+                    </div>
+                    
+                    <div class="project-section">
+                        <h3><i class="fas fa-lightbulb"></i> Problem Statement</h3>
+                        <p id="projectModalProblem">Problem description will appear here</p>
+                    </div>
+                    
+                    <div class="project-section">
+                        <h3><i class="fas fa-cogs"></i> Implementation & Solution</h3>
+                        <div id="projectModalImplementation">Implementation details will appear here</div>
+                    </div>
+                    
+                    <div class="project-section">
+                        <h3><i class="fas fa-chart-line"></i> Performance Metrics</h3>
+                        <div id="metricsChart" class="metrics-chart">
+                            <!-- Metrics chart will be generated here -->
+                        </div>
+                    </div>
+                    
+                    <div class="project-section">
+                        <h3><i class="fas fa-trophy"></i> Impact & Results</h3>
+                        <p id="projectModalImpact">Results and impact will appear here</p>
+                    </div>
+                    
+                    <div class="project-section">
+                        <h3><i class="fas fa-tools"></i> Technologies Used</h3>
+                        <div class="tech-stack" id="projectModalTechStack">
+                            <!-- Technology badges will be inserted here -->
+                        </div>
+                    </div>
+                    
+                    <div class="project-section">
+                        <h3><i class="fas fa-link"></i> Project Links</h3>
+                        <div id="projectModalLinks" class="project-links-container">
+                            <!-- Project links will be inserted here -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <!-- Achievement Modal -->
-    <div id="achievementModal" class="achievement-modal">
+    <div id="achievementModal" class="achievement-modal"></div>
         <div class="modal-overlay" id="modalOverlay"></div>
         <div class="modal-content">
             <div class="modal-header">
