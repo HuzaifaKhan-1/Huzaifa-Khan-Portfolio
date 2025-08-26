@@ -1235,6 +1235,11 @@ body {
     margin: 0 auto;
 }
 
+.projects-subtitle {
+    font-style: italic;
+    font-family: 'Orbitron', monospace;
+}
+
 /* Section Styles */
 section {
     padding: 5rem 0;
