@@ -134,29 +134,7 @@ body {
     z-index: -1;
 }
 
-/* Cursor Effects */
-.cursor {
-    width: 20px;
-    height: 20px;
-    border: 2px solid var(--primary-color);
-    border-radius: 50%;
-    position: fixed;
-    pointer-events: none;
-    z-index: 9999;
-    transition: transform 0.1s ease;
-    mix-blend-mode: difference;
-}
 
-.cursor-trail {
-    width: 8px;
-    height: 8px;
-    background: var(--primary-color);
-    border-radius: 50%;
-    position: fixed;
-    pointer-events: none;
-    z-index: 9998;
-    transition: transform 0.15s ease;
-}
 
 /* Navigation */
 .navbar {
@@ -2543,8 +2521,6 @@ section {
 /* Print Styles */
 @media print {
     #particles-js,
-    .cursor,
-    .cursor-trail,
     .navbar,
     .scroll-indicator {
         display: none !important;

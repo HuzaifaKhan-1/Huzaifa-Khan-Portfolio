@@ -3,7 +3,6 @@ document.addEventListener('DOMContentLoaded', function() {
     // Initialize all components
     initializeTheme();
     initializeNavigation();
-    initializeCursor();
     initializeScrollAnimations();
     initializeSkillBars();
     initializeProjectFilters();
@@ -125,54 +124,7 @@ function initializeNavigation() {
 }
 
 // Custom cursor effects
-function initializeCursor() {
-    const cursor = document.querySelector('.cursor');
-    const cursorTrail = document.querySelector('.cursor-trail');
 
-    if (!cursor || !cursorTrail) return;
-
-    let mouseX = 0, mouseY = 0;
-    let trailX = 0, trailY = 0;
-
-    // Update mouse position
-    document.addEventListener('mousemove', (e) => {
-        mouseX = e.clientX;
-        mouseY = e.clientY;
-    });
-
-    // Animate cursor
-    function animateCursor() {
-        // Main cursor follows mouse immediately
-        cursor.style.left = mouseX + 'px';
-        cursor.style.top = mouseY + 'px';
-
-        // Trail follows with delay
-        trailX += (mouseX - trailX) * 0.1;
-        trailY += (mouseY - trailY) * 0.1;
-
-        cursorTrail.style.left = trailX + 'px';
-        cursorTrail.style.top = trailY + 'px';
-
-        requestAnimationFrame(animateCursor);
-    }
-
-    animateCursor();
-
-    // Cursor interactions
-    const interactiveElements = document.querySelectorAll('a, button, .btn, .project-card, .experience-card');
-
-    interactiveElements.forEach(element => {
-        element.addEventListener('mouseenter', () => {
-            cursor.style.transform = 'scale(1.5)';
-            cursor.style.backgroundColor = 'var(--primary-color)';
-        });
-
-        element.addEventListener('mouseleave', () => {
-            cursor.style.transform = 'scale(1)';
-            cursor.style.backgroundColor = 'transparent';
-        });
-    });
-}
 
 // Scroll animations
 function initializeScrollAnimations() {
