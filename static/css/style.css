@@ -514,8 +514,8 @@ body {
 
 /* Achievement Gallery Section */
 .achievement-gallery-section {
-    background: var(--bg-secondary);
-    padding: 4rem 1rem;
+    background: transparent;
+    padding: 4rem 0;
 }
 
 .achievement-gallery {
@@ -526,60 +526,24 @@ body {
 .gallery-container {
     position: relative;
     overflow: hidden;
-    border-radius: 20px;
-    background: rgba(255, 255, 255, 0.05);
-    backdrop-filter: blur(20px);
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    box-shadow: var(--shadow-heavy);
+    border-radius: 0;
+    background: transparent;
+    backdrop-filter: none;
+    border: none;
+    box-shadow: none;
 }
 
 .gallery-container::before,
 .gallery-container::after {
-    content: '';
-    position: absolute;
-    top: 0;
-    bottom: 0;
-    width: 80px;
-    z-index: 10;
-    pointer-events: none;
-}
-
-.gallery-container::before {
-    left: 0;
-    background: linear-gradient(90deg, 
-        rgba(10, 10, 15, 0.9) 0%, 
-        rgba(10, 10, 15, 0.7) 30%, 
-        transparent 100%);
-}
-
-.gallery-container::after {
-    right: 0;
-    background: linear-gradient(-90deg, 
-        rgba(10, 10, 15, 0.9) 0%, 
-        rgba(10, 10, 15, 0.7) 30%, 
-        transparent 100%);
-}
-
-[data-theme="light"] .gallery-container::before {
-    background: linear-gradient(90deg, 
-        rgba(255, 255, 255, 0.9) 0%, 
-        rgba(255, 255, 255, 0.7) 30%, 
-        transparent 100%);
-}
-
-[data-theme="light"] .gallery-container::after {
-    background: linear-gradient(-90deg, 
-        rgba(255, 255, 255, 0.9) 0%, 
-        rgba(255, 255, 255, 0.7) 30%, 
-        transparent 100%);
+    display: none;
 }
 
 .gallery-track {
     display: flex;
     transition: transform 0.6s cubic-bezier(0.25, 0.8, 0.25, 1);
     will-change: transform;
-    padding: 20px 0;
-    margin-left: 20px;
+    padding: 40px 0;
+    margin-left: 0;
 }
 
 .achievement-item {
@@ -592,7 +556,8 @@ body {
     overflow: hidden;
     cursor: pointer;
     transition: var(--transition);
-    background: var(--bg-tertiary);
+    background: transparent;
+    box-shadow: var(--shadow-medium);
 }
 
 .achievement-item:hover {
@@ -658,7 +623,7 @@ body {
 /* Mobile Responsive Design for Achievement Gallery */
 @media (max-width: 768px) {
     .achievement-gallery-section {
-        padding: 3rem 0.5rem;
+        padding: 3rem 0;
     }
 
     .section-title {
@@ -670,13 +635,8 @@ body {
     }
 
     .achievement-gallery {
-        padding: 0 0.5rem;
+        padding: 0;
         margin-top: 1.5rem;
-    }
-
-    .gallery-container::before,
-    .gallery-container::after {
-        width: 60px;
     }
 
     .achievement-item {
@@ -696,7 +656,7 @@ body {
 
 @media (max-width: 480px) {
     .achievement-gallery-section {
-        padding: 2rem 0.25rem;
+        padding: 2rem 0;
     }
 
     .section-title {
@@ -709,12 +669,7 @@ body {
     }
 
     .achievement-gallery {
-        padding: 0 0.25rem;
-    }
-
-    .gallery-container::before,
-    .gallery-container::after {
-        width: 40px;
+        padding: 0;
     }
 
     .achievement-item {
