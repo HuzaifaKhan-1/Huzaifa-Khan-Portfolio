@@ -1028,24 +1028,155 @@ function initializeProjectModal() {
     const modalClose = document.getElementById('projectModalClose');
     const projectCards = document.querySelectorAll('.project-card[data-project]');
 
-    // Add click listeners to project cards
-    projectCards.forEach(card => {
+    // Add click listeners to project cards with enhanced effects
+    projectCards.forEach((card, index) => {
         card.style.cursor = 'pointer';
-        card.addEventListener('click', () => {
+        
+        // Add unique click indicator with random effects
+        const clickIndicator = document.createElement('div');
+        clickIndicator.className = 'project-click-indicator';
+        
+        // Different indicator styles for variety
+        const indicators = [
+            '<i class="fas fa-mouse-pointer"></i> Click to Explore',
+            '<i class="fas fa-eye"></i> View Details',
+            '<i class="fas fa-rocket"></i> Launch Project',
+            '<i class="fas fa-code"></i> See the Code',
+            '<i class="fas fa-star"></i> Discover More',
+            '<i class="fas fa-bolt"></i> Quick View',
+            '<i class="fas fa-gem"></i> Explore Project'
+        ];
+        
+        clickIndicator.innerHTML = indicators[index % indicators.length];
+        card.appendChild(clickIndicator);
+        
+        // Enhanced hover effects
+        let hoverTimeout;
+        
+        card.addEventListener('mouseenter', () => {
+            clearTimeout(hoverTimeout);
+            
+            // Add ripple effect on hover
+            const ripple = document.createElement('div');
+            ripple.style.cssText = `
+                position: absolute;
+                top: 50%;
+                left: 50%;
+                width: 0;
+                height: 0;
+                border-radius: 50%;
+                background: radial-gradient(circle, rgba(0, 212, 255, 0.3) 0%, transparent 70%);
+                transform: translate(-50%, -50%);
+                pointer-events: none;
+                z-index: 1;
+                animation: rippleExpand 1s ease-out forwards;
+            `;
+            
+            // Add ripple keyframes if not already added
+            if (!document.getElementById('ripple-styles')) {
+                const rippleStyles = document.createElement('style');
+                rippleStyles.id = 'ripple-styles';
+                rippleStyles.textContent = `
+                    @keyframes rippleExpand {
+                        0% {
+                            width: 0;
+                            height: 0;
+                            opacity: 1;
+                        }
+                        100% {
+                            width: 300px;
+                            height: 300px;
+                            opacity: 0;
+                        }
+                    }
+                    
+                    @keyframes cardGlow {
+                        0% { box-shadow: var(--shadow-heavy), 0 0 40px rgba(0, 212, 255, 0.3); }
+                        50% { box-shadow: var(--shadow-heavy), 0 0 60px rgba(0, 212, 255, 0.5), 0 0 100px rgba(78, 205, 196, 0.2); }
+                        100% { box-shadow: var(--shadow-heavy), 0 0 40px rgba(0, 212, 255, 0.3); }
+                    }
+                `;
+                document.head.appendChild(rippleStyles);
+            }
+            
+            card.appendChild(ripple);
+            
+            // Add glow animation
+            card.style.animation = 'cardGlow 2s ease-in-out infinite';
+            
+            // Remove ripple after animation
+            setTimeout(() => {
+                if (ripple.parentNode === card) {
+                    card.removeChild(ripple);
+                }
+            }, 1000);
+        });
+        
+        card.addEventListener('mouseleave', () => {
+            hoverTimeout = setTimeout(() => {
+                card.style.animation = '';
+            }, 100);
+        });
+        
+        // Enhanced click effect
+        card.addEventListener('click', (e) => {
+            // Create click burst effect
+            const burst = document.createElement('div');
+            const rect = card.getBoundingClientRect();
+            const x = e.clientX - rect.left;
+            const y = e.clientY - rect.top;
+            
+            burst.style.cssText = `
+                position: absolute;
+                left: ${x}px;
+                top: ${y}px;
+                width: 4px;
+                height: 4px;
+                background: radial-gradient(circle, #00d4ff 0%, transparent 70%);
+                border-radius: 50%;
+                pointer-events: none;
+                z-index: 15;
+                animation: burstExpand 0.6s ease-out forwards;
+            `;
+            
+            // Add burst animation if not already added
+            if (!document.getElementById('burst-styles')) {
+                const burstStyles = document.createElement('style');
+                burstStyles.id = 'burst-styles';
+                burstStyles.textContent = `
+                    @keyframes burstExpand {
+                        0% {
+                            width: 4px;
+                            height: 4px;
+                            opacity: 1;
+                            transform: scale(1);
+                        }
+                        100% {
+                            width: 100px;
+                            height: 100px;
+                            opacity: 0;
+                            transform: scale(1) translate(-50px, -50px);
+                        }
+                    }
+                `;
+                document.head.appendChild(burstStyles);
+            }
+            
+            card.appendChild(burst);
+            
+            // Remove burst after animation
+            setTimeout(() => {
+                if (burst.parentNode === card) {
+                    card.removeChild(burst);
+                }
+            }, 600);
+            
+            // Open modal
             const projectId = card.getAttribute('data-project');
             if (projectData[projectId]) {
                 openProjectModal(projectId);
             }
         });
-
-        // Add hover effect
-        const projectContent = card.querySelector('.project-content');
-        if (projectContent) {
-            const clickIndicator = document.createElement('div');
-            clickIndicator.className = 'project-click-indicator';
-            clickIndicator.innerHTML = '<i class="fas fa-info-circle"></i> Click for details';
-            projectContent.appendChild(clickIndicator);
-        }
     });
 
     // Close modal functionality

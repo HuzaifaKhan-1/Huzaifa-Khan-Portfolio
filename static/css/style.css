@@ -1087,36 +1087,232 @@ body {
     box-shadow: var(--shadow-medium);
 }
 
+/* Enhanced Project Card Hover Effects */
+.project-card {
+    position: relative;
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    overflow: hidden;
+}
+
+.project-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 3px;
+    background: var(--gradient-primary);
+    transform: scaleX(0);
+    transition: transform 0.4s ease;
+}
+
+.project-card::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(
+        45deg,
+        transparent 30%,
+        rgba(0, 212, 255, 0.05) 50%,
+        transparent 70%
+    );
+    background-size: 200% 200%;
+    background-position: -100% -100%;
+    transition: all 0.6s ease;
+    pointer-events: none;
+    opacity: 0;
+}
+
+.project-card:hover::before {
+    transform: scaleX(1);
+}
+
+.project-card:hover::after {
+    opacity: 1;
+    background-position: 100% 100%;
+    animation: shimmerSweep 1.5s ease-in-out;
+}
+
+@keyframes shimmerSweep {
+    0% {
+        background-position: -100% -100%;
+        opacity: 0;
+    }
+    50% {
+        opacity: 1;
+    }
+    100% {
+        background-position: 100% 100%;
+        opacity: 0;
+    }
+}
+
+.project-card:hover {
+    transform: translateY(-12px) scale(1.03);
+    box-shadow: 
+        var(--shadow-heavy),
+        0 0 40px rgba(0, 212, 255, 0.3),
+        0 0 80px rgba(0, 212, 255, 0.1);
+}
+
+/* Unique Click Indicator */
 .project-click-indicator {
     position: absolute;
-    bottom: 10px;
-    right: 10px;
-    background: rgba(0, 212, 255, 0.9);
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: linear-gradient(135deg, rgba(0, 212, 255, 0.95), rgba(78, 205, 196, 0.95));
     color: white;
-    padding: 4px 8px;
-    border-radius: 12px;
-    font-size: 0.7rem;
-    font-weight: 600;
+    padding: 12px 20px;
+    border-radius: 25px;
+    font-size: 0.9rem;
+    font-weight: 700;
     opacity: 0;
-    transition: all 0.3s ease;
+    visibility: hidden;
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
     display: flex;
     align-items: center;
-    gap: 0.25rem;
+    gap: 0.5rem;
+    backdrop-filter: blur(10px);
+    border: 2px solid rgba(255, 255, 255, 0.2);
+    box-shadow: 
+        0 8px 32px rgba(0, 212, 255, 0.4),
+        inset 0 1px 0 rgba(255, 255, 255, 0.2);
+    z-index: 10;
+    white-space: nowrap;
+    cursor: pointer;
+}
+
+.project-click-indicator i {
+    font-size: 1rem;
+    animation: iconPulse 2s ease-in-out infinite;
+}
+
+@keyframes iconPulse {
+    0%, 100% {
+        transform: scale(1);
+        opacity: 1;
+    }
+    50% {
+        transform: scale(1.2);
+        opacity: 0.8;
+    }
 }
 
 .project-card:hover .project-click-indicator {
     opacity: 1;
-    animation: pulse 2s infinite;
+    visibility: visible;
+    transform: translate(-50%, -50%) scale(1);
+    animation: 
+        floatIn 0.6s ease-out,
+        gentleFloat 3s ease-in-out 0.6s infinite;
 }
 
-.project-card {
+@keyframes floatIn {
+    0% {
+        opacity: 0;
+        visibility: hidden;
+        transform: translate(-50%, -50%) scale(0.5) rotate(-10deg);
+    }
+    100% {
+        opacity: 1;
+        visibility: visible;
+        transform: translate(-50%, -50%) scale(1) rotate(0deg);
+    }
+}
+
+@keyframes gentleFloat {
+    0%, 100% {
+        transform: translate(-50%, -50%) translateY(0px);
+    }
+    50% {
+        transform: translate(-50%, -50%) translateY(-3px);
+    }
+}
+
+.project-click-indicator:hover {
+    transform: translate(-50%, -50%) scale(1.05);
+    box-shadow: 
+        0 12px 40px rgba(0, 212, 255, 0.6),
+        inset 0 1px 0 rgba(255, 255, 255, 0.3);
+}
+
+/* Enhanced Project Image Effects */
+.project-image {
     position: relative;
-    transition: var(--transition);
+    overflow: hidden;
+    transition: all 0.6s ease;
 }
 
+.project-card:hover .project-image {
+    transform: scale(1.05);
+}
+
+.project-image::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(
+        90deg,
+        transparent,
+        rgba(255, 255, 255, 0.2),
+        transparent
+    );
+    transition: left 0.8s ease;
+    z-index: 1;
+}
+
+.project-card:hover .project-image::before {
+    left: 100%;
+}
+
+/* Enhanced Content Animation */
+.project-content {
+    position: relative;
+    z-index: 2;
+}
+
+.project-content h3 {
+    transition: all 0.3s ease;
+}
+
+.project-card:hover .project-content h3 {
+    color: var(--primary-color);
+    text-shadow: 0 0 10px rgba(0, 212, 255, 0.3);
+}
+
+/* Tech Tags Animation */
+.project-tech {
+    transition: all 0.3s ease;
+}
+
+.project-card:hover .tech-tag {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 212, 255, 0.2);
+}
+
+.tech-tag:nth-child(odd) {
+    transition-delay: 0.1s;
+}
+
+.tech-tag:nth-child(even) {
+    transition-delay: 0.2s;
+}
+
+/* Border Glow Effect */
 .project-card:hover {
-    transform: translateY(-10px) scale(1.02);
-    box-shadow: var(--shadow-heavy), 0 0 30px rgba(0, 212, 255, 0.2);
+    border: 1px solid rgba(0, 212, 255, 0.5);
+    position: relative;
+}
+
+.project-card:hover::before {
+    box-shadow: 0 0 20px rgba(0, 212, 255, 0.4);
 }
 
 /* Project Modal Responsive Design */

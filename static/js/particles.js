@@ -1,134 +1,103 @@
-// Particle system configuration and initialization
+// Enhanced Particle System with Project Card Interactions
 class ParticleSystem {
-    constructor() {
-        this.canvas = null;
-        this.ctx = null;
+    constructor(canvas) {
+        this.canvas = canvas;
+        this.ctx = canvas.getContext('2d');
         this.particles = [];
-        this.mouse = { x: 0, y: 0 };
-        this.isVisible = true;
-        this.animationId = null;
-
-        this.config = {
-            particleCount: 80,
-            particleSpeed: 0.5,
-            particleSize: 2,
-            connectionDistance: 120,
-            mouseRadius: 150,
-            colors: {
-                particles: '#00d4ff',
-                connections: '#4ecdc4',
-                mouseGlow: '#ff6b6b'
-            }
-        };
-
+        this.mouse = { x: 0, y: 0, isMoving: false };
+        this.projectCards = [];
+        this.resize();
         this.init();
+        this.initProjectCardEffects();
+
+        // Mouse tracking
+        canvas.addEventListener('mousemove', (e) => {
+            this.mouse.x = e.clientX;
+            this.mouse.y = e.clientY;
+            this.mouse.isMoving = true;
+
+            setTimeout(() => {
+                this.mouse.isMoving = false;
+            }, 100);
+        });
+
+        // Window resize handler
+        window.addEventListener('resize', () => this.resize());
     }
 
-    init() {
-        this.createCanvas();
-        this.createParticles();
-        this.bindEvents();
-        this.animate();
-    }
-
-    createCanvas() {
-        // Create canvas element
-        this.canvas = document.createElement('canvas');
-        this.canvas.id = 'particle-canvas';
-        this.canvas.style.position = 'fixed';
-        this.canvas.style.top = '0';
-        this.canvas.style.left = '0';
-        this.canvas.style.zIndex = '-1';
-        this.canvas.style.pointerEvents = 'none';
-
-        // Get canvas context
-        this.ctx = this.canvas.getContext('2d');
-
-        // Add to particles container
-        const container = document.getElementById('particles-js');
-        if (container) {
-            container.appendChild(this.canvas);
-        }
-
-        // Set canvas size
-        this.resizeCanvas();
-    }
-
-    resizeCanvas() {
+    resize() {
         this.canvas.width = window.innerWidth;
         this.canvas.height = window.innerHeight;
     }
 
-    createParticles() {
-        this.particles = [];
+    init() {
+        const particleCount = Math.min(150, window.innerWidth / 10);
 
-        for (let i = 0; i < this.config.particleCount; i++) {
+        for (let i = 0; i < particleCount; i++) {
             this.particles.push({
                 x: Math.random() * this.canvas.width,
                 y: Math.random() * this.canvas.height,
-                vx: (Math.random() - 0.5) * this.config.particleSpeed,
-                vy: (Math.random() - 0.5) * this.config.particleSpeed,
-                size: Math.random() * this.config.particleSize + 1,
-                opacity: Math.random() * 0.5 + 0.5,
-                pulseSpeed: Math.random() * 0.02 + 0.01,
-                pulsePhase: Math.random() * Math.PI * 2
+                vx: (Math.random() - 0.5) * 0.5,
+                vy: (Math.random() - 0.5) * 0.5,
+                size: Math.random() * 2 + 1,
+                opacity: Math.random() * 0.5 + 0.2,
+                originalSize: Math.random() * 2 + 1,
+                hue: 195 // Base hue for cyan color
             });
         }
     }
 
-    bindEvents() {
-        // Mouse move event
-        document.addEventListener('mousemove', (e) => {
-            this.mouse.x = e.clientX;
-            this.mouse.y = e.clientY;
-        });
+    initProjectCardEffects() {
+        // Find all project cards and add enhanced hover effects
+        setTimeout(() => {
+            this.projectCards = document.querySelectorAll('.project-card');
+            this.projectCards.forEach(card => {
+                this.addCardHoverEffect(card);
+            });
+        }, 1000);
+    }
 
-        // Window resize event
-        window.addEventListener('resize', () => {
-            this.resizeCanvas();
-            this.createParticles();
-        });
+    addCardHoverEffect(card) {
+        let isHovering = false;
+        let hoverParticles = [];
 
-        // Visibility change event
-        document.addEventListener('visibilitychange', () => {
-            this.isVisible = !document.hidden;
-            if (this.isVisible) {
-                this.animate();
+        card.addEventListener('mouseenter', () => {
+            isHovering = true;
+            const rect = card.getBoundingClientRect();
+
+            // Create special hover particles around the card
+            for (let i = 0; i < 20; i++) {
+                hoverParticles.push({
+                    x: rect.left + Math.random() * rect.width,
+                    y: rect.top + Math.random() * rect.height,
+                    vx: (Math.random() - 0.5) * 2,
+                    vy: (Math.random() - 0.5) * 2,
+                    size: Math.random() * 3 + 2,
+                    opacity: 1,
+                    life: 60,
+                    maxLife: 60,
+                    hue: 195 + Math.random() * 60 - 30 // Vary hue around cyan
+                });
             }
         });
 
-        // Theme change event
-        document.addEventListener('themeChanged', () => {
-            this.updateColors();
+        card.addEventListener('mouseleave', () => {
+            isHovering = false;
+            hoverParticles = [];
         });
+
+        // Store hover state for animation
+        card._hoverState = { isHovering: () => isHovering, particles: hoverParticles };
     }
 
-    updateColors() {
-        const theme = document.documentElement.getAttribute('data-theme');
-        if (theme === 'light') {
-            this.config.colors = {
-                particles: '#667eea',
-                connections: '#764ba2',
-                mouseGlow: '#ff6b6b'
-            };
-        } else {
-            this.config.colors = {
-                particles: '#00d4ff',
-                connections: '#4ecdc4',
-                mouseGlow: '#ff6b6b'
-            };
-        }
-    }
+    animate() {
+        this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
 
-    updateParticles() {
-        this.particles.forEach(particle => {
+        // Animate regular particles
+        this.particles.forEach((particle, index) => {
             // Update position
             particle.x += particle.vx;
             particle.y += particle.vy;
-
-            // Update pulse
-            particle.pulsePhase += particle.pulseSpeed;
-            particle.opacity = 0.3 + Math.sin(particle.pulsePhase) * 0.3;
 
             // Bounce off edges
             if (particle.x < 0 || particle.x > this.canvas.width) {
@@ -138,231 +107,112 @@ class ParticleSystem {
                 particle.vy *= -1;
             }
 
-            // Keep particles in bounds
-            particle.x = Math.max(0, Math.min(this.canvas.width, particle.x));
-            particle.y = Math.max(0, Math.min(this.canvas.height, particle.y));
-
             // Mouse interaction
-            const dx = this.mouse.x - particle.x;
-            const dy = this.mouse.y - particle.y;
-            const distance = Math.sqrt(dx * dx + dy * dy);
-
-            if (distance < this.config.mouseRadius) {
-                const force = (this.config.mouseRadius - distance) / this.config.mouseRadius;
-                const angle = Math.atan2(dy, dx);
-                particle.vx -= Math.cos(angle) * force * 0.01;
-                particle.vy -= Math.sin(angle) * force * 0.01;
-            }
-
-            // Limit speed
-            const speed = Math.sqrt(particle.vx * particle.vx + particle.vy * particle.vy);
-            if (speed > this.config.particleSpeed * 2) {
-                particle.vx = (particle.vx / speed) * this.config.particleSpeed * 2;
-                particle.vy = (particle.vy / speed) * this.config.particleSpeed * 2;
-            }
-        });
-    }
-
-    drawParticles() {
-        this.particles.forEach(particle => {
-            // Create gradient for particle
-            const gradient = this.ctx.createRadialGradient(
-                particle.x, particle.y, 0,
-                particle.x, particle.y, particle.size * 2
-            );
-            gradient.addColorStop(0, `${this.config.colors.particles}${Math.floor(particle.opacity * 255).toString(16).padStart(2, '0')}`);
-            gradient.addColorStop(1, 'transparent');
-
-            this.ctx.fillStyle = gradient;
-            this.ctx.beginPath();
-            this.ctx.arc(particle.x, particle.y, particle.size, 0, Math.PI * 2);
-            this.ctx.fill();
-        });
-    }
-
-    drawConnections() {
-        for (let i = 0; i < this.particles.length; i++) {
-            for (let j = i + 1; j < this.particles.length; j++) {
-                const dx = this.particles[i].x - this.particles[j].x;
-                const dy = this.particles[i].y - this.particles[j].y;
+            if (this.mouse.isMoving) {
+                const dx = this.mouse.x - particle.x;
+                const dy = this.mouse.y - particle.y;
                 const distance = Math.sqrt(dx * dx + dy * dy);
 
-                if (distance < this.config.connectionDistance) {
-                    const opacity = 1 - (distance / this.config.connectionDistance);
+                if (distance < 100) {
+                    const force = (100 - distance) / 100;
+                    particle.vx -= (dx / distance) * force * 0.01;
+                    particle.vy -= (dy / distance) * force * 0.01;
+                    particle.size = particle.originalSize * (1 + force);
+                    particle.opacity = Math.min(1, particle.opacity + force * 0.3);
+                }
+            } else {
+                particle.size = particle.originalSize;
+                particle.opacity = Math.max(0.2, particle.opacity - 0.01);
+            }
 
-                    this.ctx.strokeStyle = `${this.config.colors.connections}${Math.floor(opacity * 100).toString(16).padStart(2, '0')}`;
-                    this.ctx.lineWidth = 1;
+            // Apply friction
+            particle.vx *= 0.99;
+            particle.vy *= 0.99;
+
+            // Draw particle
+            this.ctx.beginPath();
+            this.ctx.arc(particle.x, particle.y, particle.size, 0, Math.PI * 2);
+            this.ctx.fillStyle = `hsla(${particle.hue}, 100%, 50%, ${particle.opacity})`;
+            this.ctx.fill();
+        });
+
+        // Animate project card hover particles
+        this.projectCards.forEach(card => {
+            if (card._hoverState && card._hoverState.isHovering()) {
+                const rect = card.getBoundingClientRect();
+
+                card._hoverState.particles.forEach((particle, index) => {
+                    particle.x += particle.vx;
+                    particle.y += particle.vy;
+                    particle.life--;
+                    particle.opacity = particle.life / particle.maxLife;
+
+                    // Keep particles within card bounds
+                    if (particle.x < rect.left || particle.x > rect.right) {
+                        particle.vx *= -1;
+                    }
+                    if (particle.y < rect.top || particle.y > rect.bottom) {
+                        particle.vy *= -1;
+                    }
+
+                    // Draw hover particle
                     this.ctx.beginPath();
-                    this.ctx.moveTo(this.particles[i].x, this.particles[i].y);
-                    this.ctx.lineTo(this.particles[j].x, this.particles[j].y);
-                    this.ctx.stroke();
+                    this.ctx.arc(particle.x, particle.y, particle.size, 0, Math.PI * 2);
+                    this.ctx.fillStyle = `hsla(${particle.hue}, 100%, 60%, ${particle.opacity})`;
+                    this.ctx.fill();
+
+                    // Remove dead particles
+                    if (particle.life <= 0) {
+                        card._hoverState.particles.splice(index, 1);
+                    }
+                });
+
+                // Add new particles periodically
+                if (Math.random() < 0.1) {
+                    card._hoverState.particles.push({
+                        x: rect.left + Math.random() * rect.width,
+                        y: rect.top + Math.random() * rect.height,
+                        vx: (Math.random() - 0.5) * 2,
+                        vy: (Math.random() - 0.5) * 2,
+                        size: Math.random() * 3 + 2,
+                        opacity: 1,
+                        life: 60,
+                        maxLife: 60,
+                        hue: 195 + Math.random() * 60 - 30
+                    });
                 }
             }
-        }
-    }
+        });
 
-    drawMouseGlow() {
-        if (this.mouse.x === 0 && this.mouse.y === 0) return;
-
-        const gradient = this.ctx.createRadialGradient(
-            this.mouse.x, this.mouse.y, 0,
-            this.mouse.x, this.mouse.y, this.config.mouseRadius
-        );
-        gradient.addColorStop(0, `${this.config.colors.mouseGlow}15`);
-        gradient.addColorStop(0.5, `${this.config.colors.mouseGlow}08`);
-        gradient.addColorStop(1, 'transparent');
-
-        this.ctx.fillStyle = gradient;
-        this.ctx.beginPath();
-        this.ctx.arc(this.mouse.x, this.mouse.y, this.config.mouseRadius, 0, Math.PI * 2);
-        this.ctx.fill();
-    }
-
-    animate() {
-        if (!this.isVisible) return;
-
-        // Clear canvas
-        this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
-
-        // Update and draw
-        this.updateParticles();
-        this.drawConnections();
-        this.drawParticles();
-        this.drawMouseGlow();
-
-        // Continue animation
-        this.animationId = requestAnimationFrame(() => this.animate());
-    }
-
-    destroy() {
-        if (this.animationId) {
-            cancelAnimationFrame(this.animationId);
-        }
-        if (this.canvas && this.canvas.parentNode) {
-            this.canvas.parentNode.removeChild(this.canvas);
-        }
+        requestAnimationFrame(() => this.animate());
     }
 }
 
-// Initialize particles.js
-particlesJS('particles-js', {
-    particles: {
-        number: {
-            value: 80,
-            density: {
-                enable: true,
-                value_area: 800
-            }
-        },
-        color: {
-            value: '#00d4ff'
-        },
-        shape: {
-            type: 'circle',
-            stroke: {
-                width: 0,
-                color: '#000000'
-            }
-        },
-        opacity: {
-            value: 0.5,
-            random: false,
-            anim: {
-                enable: false,
-                speed: 1,
-                opacity_min: 0.1,
-                sync: false
-            }
-        },
-        size: {
-            value: 3,
-            random: true,
-            anim: {
-                enable: false,
-                speed: 40,
-                size_min: 0.1,
-                sync: false
-            }
-        },
-        line_linked: {
-            enable: true,
-            distance: 150,
-            color: '#4ecdc4',
-            opacity: 0.4,
-            width: 1
-        },
-        move: {
-            enable: true,
-            speed: 2,
-            direction: 'none',
-            random: false,
-            straight: false,
-            out_mode: 'out',
-            bounce: false,
-            attract: {
-                enable: false,
-                rotateX: 600,
-                rotateY: 1200
-            }
-        }
-    },
-    interactivity: {
-        detect_on: 'canvas',
-        events: {
-            onhover: {
-                enable: true,
-                mode: 'repulse'
-            },
-            onclick: {
-                enable: true,
-                mode: 'push'
-            },
-            resize: true
-        },
-        modes: {
-            grab: {
-                distance: 400,
-                line_linked: {
-                    opacity: 1
-                }
-            },
-            bubble: {
-                distance: 400,
-                size: 40,
-                duration: 2,
-                opacity: 8,
-                speed: 3
-            },
-            repulse: {
-                distance: 200,
-                duration: 0.4
-            },
-            push: {
-                particles_nb: 4
-            },
-            remove: {
-                particles_nb: 2
-            }
-        }
-    },
-    retina_detect: true
-});
-
-// Initialize particle system
-let particleSystem;
-
+// Initialize particles when DOM is loaded
 document.addEventListener('DOMContentLoaded', () => {
-    try {
-        particleSystem = new ParticleSystem();
-    } catch (error) {
-        console.log('Custom particle system failed, falling back to particles.js');
-        initFallbackParticles();
+    const canvas = document.createElement('canvas');
+    canvas.id = 'particles-canvas';
+    canvas.style.position = 'fixed';
+    canvas.style.top = '0';
+    canvas.style.left = '0';
+    canvas.style.width = '100%';
+    canvas.style.height = '100%';
+    canvas.style.zIndex = '-1';
+    canvas.style.pointerEvents = 'none';
+
+    // Check if particles-js div exists, if so replace it
+    const particlesDiv = document.getElementById('particles-js');
+    if (particlesDiv) {
+        particlesDiv.parentNode.replaceChild(canvas, particlesDiv);
+    } else {
+        document.body.appendChild(canvas);
     }
+
+    const particleSystem = new ParticleSystem(canvas);
+    particleSystem.animate();
 });
 
-// Clean up on page unload
-window.addEventListener('beforeunload', () => {
-    if (particleSystem) {
-        particleSystem.destroy();
-    }
-});
+// Fallback particles.js configuration for compatibility
+window.particlesJS = function(elementId, config) {
+    console.log('Using enhanced particle system with project card effects');
+};
