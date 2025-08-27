@@ -1894,7 +1894,7 @@ const certificateData = {
             "Quantum Algorithms",
         ],
         verificationUrl: "https://www.credly.com/badges/7f120fca-d413-456b-9245-ac5407c41d33/public_url",
-        certificateImage: "assets/certificates/ibm-quantum.jpg",
+        certificateImage: "assets/certificates/ibm-quantum.png",
     },
 };
 
