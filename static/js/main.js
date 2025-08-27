@@ -420,7 +420,7 @@ const projectData = {
         accuracy: '94.2%',
         precision: '93.7%',
         images: [
-            'assets/achievements/HeartDisease.mp4',
+            'assets/achievements/Heartdisease.mp4',
         ],
         problem: 'Develop a machine learning model to predict heart disease risk using patient medical data, helping doctors make informed decisions for early intervention.',
         implementation: [
@@ -481,7 +481,6 @@ const projectData = {
         recommendations: '10K+ generated',
         images: [
             'assets/achievements/tripgenie.mp4',
-            'assets/achievements/tripgenie1.png',
             'assets/achievements/tripgenie2.png'
         ],
         problem: 'Design an AI-powered travel itinerary planner that creates personalized travel recommendations based on user preferences, budget, and travel history.',
