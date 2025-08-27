@@ -377,13 +377,19 @@ const projectData = {
     'codeheaven': {
         title: 'CodeHeaven - Programming Learning Platform',
         category: 'Web Development',
-        duration: '6 months',
+        duration: '1 month',
         status: 'Completed',
-        accuracy: '95%',
         userSatisfaction: '4.8/5',
         images: [
-            'assets/projects/codeheaven1.jpg',
-            'assets/projects/codeheaven2.jpg'
+            'assets/achievements/codeheaven1.png',
+            'assets/achievements/codeheaven2.png',
+            'assets/achievements/codeheaven3.png',
+            'assets/achievements/codeheaven4.png',
+            'assets/achievements/codeheaven5.png',
+            'assets/achievements/codeheaven6.png',
+            'assets/achievements/codeheaven7.png',
+            'assets/achievements/codeheaven8.png',
+            
         ],
         problem: 'Create an interactive programming learning platform that provides real-time code editing, compilation, and step-by-step tutorials for multiple programming languages.',
         implementation: [
@@ -402,19 +408,18 @@ const projectData = {
             completionRate: 78,
             performance: 92
         },
-        githubUrl: 'https://github.com/huzaifakamaalkhan/codeheaven',
-        liveUrl: 'https://codeheaven-demo.com'
+        githubUrl: 'https://github.com/HuzaifaKhan-1/CodeHeaven-Website',
+        liveUrl: 'https://huzaifakhan-1.github.io/CodeHeaven-Website/'
     },
     'heart-disease': {
         title: 'Heart Disease Prediction System',
         category: 'Machine Learning',
-        duration: '4 months',
+        duration: '3 days',
         status: 'Completed',
         accuracy: '94.2%',
         precision: '93.7%',
         images: [
-            'assets/projects/heart1.jpg',
-            'assets/projects/heart2.jpg'
+            'assets/achievements/heart-project1.jpg',
         ],
         problem: 'Develop a machine learning model to predict heart disease risk using patient medical data, helping doctors make informed decisions for early intervention.',
         implementation: [
@@ -433,18 +438,17 @@ const projectData = {
             recall: 92.1,
             f1Score: 92.9
         },
-        githubUrl: 'https://github.com/huzaifakamaalkhan/heart-disease-prediction'
+        githubUrl: 'https://github.com/HuzaifaKhan-1/Heart-Disease-Prediction-WebApp'
     },
     'ai-fitness': {
         title: 'AI Fitness Tracker',
         category: 'AI Application',
-        duration: '3 months',
+        duration: '7 days',
         status: 'Completed',
         accuracy: '98%',
         realTimeProcessing: '< 100ms',
         images: [
-            'assets/projects/fitness1.jpg',
-            'assets/projects/fitness2.jpg'
+            'assets/achievements/abc.png'
         ],
         problem: 'Create an AI-powered fitness tracking application that accurately predicts calories burned based on user activities, biometric data, and exercise patterns.',
         implementation: [
@@ -463,7 +467,7 @@ const projectData = {
             userRetention: 85,
             dataProcessing: 99
         },
-        githubUrl: 'https://github.com/huzaifakamaalkhan/ai-fitness-tracker'
+        githubUrl: 'https://github.com/HuzaifaKhan-1/personal-fitness-tracker'
     },
     'tripgenie': {
         title: 'TripGenie - AI Travel Planner',
@@ -473,8 +477,8 @@ const projectData = {
         accuracy: '92%',
         recommendations: '10K+ generated',
         images: [
-            'assets/projects/trip1.jpg',
-            'assets/projects/trip2.jpg'
+            'assets/achievements/tripgenie1.png',
+            'assets/achievements/tripgenie2.png'
         ],
         problem: 'Design an AI-powered travel itinerary planner that creates personalized travel recommendations based on user preferences, budget, and travel history.',
         implementation: [
@@ -493,12 +497,12 @@ const projectData = {
             planningEfficiency: 88,
             apiIntegration: 95
         },
-        liveUrl: 'https://tripgenie-demo.com'
+        liveUrl: 'https://huzaifakhan-1.github.io/TripGenie---Travel-Planner-/'
     },
     'pomegranate-disease': {
         title: 'Pomegranate Disease Detection',
         category: 'Machine Learning',
-        duration: '6 months',
+        duration: '7 days',
         status: 'Completed',
         accuracy: '94.15%',
         processingTime: '2.3s per image',
@@ -592,7 +596,7 @@ const achievementData = {
     'faculty-induction': {
         title: 'Faculty Induction Program',
         date: 'January 2024',
-        location: 'JSPM\'s JSCOP, Pune',
+        location: 'JSPM\'s JSCOE, Pune',
         category: 'Academic Recognition',
         images: [
             'assets/achievements/achievement1.jpg',
@@ -611,47 +615,47 @@ const achievementData = {
     },
     'kpit-sparkle': {
         title: 'KPIT Sparkle 2025 - Top 6 Finalist',
-        date: 'January 2025',
-        location: 'KPIT Technologies, Pune',
-        category: 'Innovation Competition',
+        date: 'March 2025',
+        location: 'KPIT Technologies, Pune (National Level)',
+        category: 'Nationwide Innovation & Hackathon Achievement',
         images: [
             'assets/achievements/achievement2.jpg',
             'assets/achievements/achievement6.jpg',
             'assets/achievements/achievement7.jpg',
             'assets/achievements/achievement8.jpg'
         ],
-        problem: 'Design innovative solutions for next-generation mobility challenges, focusing on autonomous vehicle technology and smart transportation systems.',
+        problem: 'Developed a VANET-based AI security system to detect and block Interest Flooding Attacks (IFA) and other malicious activities in Vehicular Named Data Networking (VNDN) for Smart Cars.',
         implementation: [
             'Formed Team Vanguardians with diverse technical expertise',
-            'Developed autonomous vehicle navigation system using AI/ML algorithms',
-            'Implemented computer vision for real-time object detection and tracking',
-            'Created predictive analytics for traffic optimization',
-            'Built comprehensive prototype with hardware integration',
-            'Presented solution to industry experts and technical panel'
+            'Built AI/ML-powered autonomous vehicle navigation with real-time vision-based object detection',
+            'Designed VANET intrusion detection system on NDN architecture',
+            'Simulated vehicular mobility using SUMO, OmNet++ & Veins framework',
+            'Detected IFA and 3 other VANET attacks with <5 ms response time',
+            'Optimized model to 97% accuracy under diverse conditions',
+            'Integrated predictive traffic analytics and hardware prototype',
+            'Presented scalable smart mobility solution to industry experts'
         ],
-        impact: 'Achieved Top 6 finalist position among hundreds of participants, gaining recognition for innovative approach to mobility solutions and technical excellence.',
-        technologies: ['Python', 'Machine Learning', 'Computer Vision', 'IoT', 'Autonomous Systems', 'Data Analytics']
-    },
+        impact: 'Achieved Top 6 finalist position among thousands of participants, gaining recognition for innovative approach to mobility solutions and technical excellence.',
+        technologies: ['NDN (Named Data Networking)', 'VNDN', 'AI/ML', 'SUMO', 'OmNet++', 'Veins Framework', 'VANET Security']
+        },
     'teaching-excellence': {
-        title: 'Teaching Excellence Recognition',
-        date: 'March 2024',
-        location: 'JSPM\'s JSCOP, Pune',
-        category: 'Educational Impact',
+        title: 'CodeCraft Hackathon – 3rd Prize',
+        date: '2025',
+        location: 'CodeCraft Hackathon (National Level)',
+        category: 'Hackathon Achievement',
         images: [
-            'assets/achievements/achievement3.jpg',
-            'assets/achievements/achievement11.jpg'
+            'assets/achievements/codecraft_hackathon.jpg'
         ],
-        problem: 'Enhance student learning experience through innovative teaching methods and mentorship programs in computer engineering subjects.',
+        problem: 'Developed a hybrid deep learning model for classifying pomegranate fruit diseases to assist farmers in early detection and crop protection.',
         implementation: [
-            'Developed interactive coding workshops for complex algorithms',
-            'Created hands-on project-based learning modules',
-            'Implemented peer mentoring programs for struggling students',
-            'Introduced gamification elements in programming courses',
-            'Organized technical skill development sessions',
-            'Established regular feedback mechanisms for continuous improvement'
+            'Built a hybrid CNN model combining VGG16 and ResNet50 architectures',
+            'Preprocessed and augmented pomegranate fruit disease dataset for better generalization',
+            'Trained and fine-tuned the model to achieve high classification performance',
+            'Collaborated with team members to design an efficient pipeline under hackathon constraints',
+            'Demonstrated the solution to judges with real-world agricultural relevance'
         ],
-        impact: 'Significantly improved student engagement and academic performance, with 95% student satisfaction rate and notable improvement in programming skills.',
-        technologies: ['Educational Tools', 'Programming Languages', 'Interactive Learning', 'Project Management']
+        impact: 'Our team secured 3rd Prize at CodeCraft Hackathon with a hybrid deep learning solution achieving 94.15% test accuracy, showcasing the potential of AI in smart agriculture.',
+        technologies: ['Python', 'TensorFlow/Keras', 'VGG16', 'ResNet50', 'CNN', 'Image Processing']
     },
     'academic-presentation': {
         title: 'Academic Research Presentation',
@@ -672,6 +676,26 @@ const achievementData = {
         ],
         impact: 'Successfully presented research work to academic community, receiving positive feedback and recognition for innovative approach and technical depth.',
         technologies: ['Machine Learning', 'Data Science', 'Research Methodologies', 'Statistical Analysis', 'Python']
+    },
+    'isro-hackathon': {
+         "title": "ISRO Hackathon – Top 10 Nationwide",
+            "date": "2025",
+            "location": "ISRO Hackathon (National Level)",
+            "category": "Hackathon Achievement",
+            "images": [
+                "assets/achievements/isro1.png"
+            ],
+            "problem": "Built a wildfire simulation and prediction system to help in early detection, monitoring, and disaster management using multi-modal space and ground data.",
+            "implementation": [
+                "Integrated ISRO’s Bhuvan satellite imagery, drone feeds, IoT sensors, and live weather APIs for real-time updates",
+                "Developed a Cellular Automata-based wildfire spread simulation model for predictive analysis",
+                "Enhanced the model using ConvLSTM + U-Net deep learning architecture achieving 97% accuracy in fire spread prediction",
+                "Built a web-based dashboard to visualize fire spread, risk zones, and resource allocation",
+                "Collaborated with team to design a scalable solution suitable for disaster management authorities"
+            ],
+            "impact": "Our team’s solution was recognized as a Finalist in ISRO Hackathon for its innovative approach to wildfire prediction and real-time monitoring, demonstrating strong potential in supporting disaster management and relief operations.",
+            "technologies": ["Python", "TensorFlow/Keras", "ConvLSTM", "U-Net", "Cellular Automata", "Satellite Imagery Processing", "IoT", "Web Dashboard"]
+
     },
     'tech-innovation': {
         title: 'Technology Innovation Leadership',
@@ -794,45 +818,44 @@ const achievementData = {
         impact: 'Gained invaluable exposure to industry innovation processes and established foundation for future professional growth in technology sector.',
         technologies: ['Innovation Processes', 'Industry Tools', 'Professional Development', 'Technology Infrastructure']
     },
-    'workshop-session': {
-        title: 'Technical Workshop Leadership',
-        date: 'November 2024',
-        location: 'JSPM\'s JSCOP, Pune',
-        category: 'Knowledge Sharing',
+    'codecircuit-outlier': {
+        title: 'CodeCraft Hackathon – 3rd Prize',
+        date: '2025',
+        location: 'CodeCraft Hackathon (National Level)',
+        category: 'Hackathon Achievement',
         images: [
-            'assets/achievements/achievement11.jpg'
+            'assets/achievements/codecraft_hackathon.jpg'
         ],
-        problem: 'Conduct comprehensive technical workshops to share knowledge and enhance learning experience for fellow students and professionals.',
+        problem: 'Developed a hybrid deep learning model for classifying pomegranate fruit diseases to assist farmers in early detection and crop protection.',
         implementation: [
-            'Designed comprehensive workshop curriculum on emerging technologies',
-            'Created hands-on coding exercises and practical demonstrations',
-            'Developed interactive learning materials and resources',
-            'Facilitated group discussions and problem-solving sessions',
-            'Provided personalized guidance and mentorship to participants',
-            'Collected feedback and continuously improved workshop content'
+            'Built a hybrid CNN model combining VGG16 and ResNet50 architectures',
+            'Preprocessed and augmented pomegranate fruit disease dataset for better generalization',
+            'Trained and fine-tuned the model to achieve high classification performance',
+            'Collaborated with team members to design an efficient pipeline under hackathon constraints',
+            'Demonstrated the solution to judges with real-world agricultural relevance'
         ],
-        impact: 'Successfully conducted multiple technical workshops with high participant satisfaction, contributing to skill development of 50+ individuals.',
-        technologies: ['Teaching Methodologies', 'Workshop Design', 'Technical Training', 'Mentorship', 'Educational Technology']
+        impact: 'Our team secured 3rd Prize at CodeCraft Hackathon with a hybrid deep learning solution achieving 94.15% test accuracy, showcasing the potential of AI in smart agriculture.',
+        technologies: ['Python', 'TensorFlow/Keras', 'VGG16', 'ResNet50', 'CNN', 'Image Processing']
     },
-    'computer-engineering': {
-        title: 'Computer Engineering Academic Excellence',
-        date: 'Ongoing',
-        location: 'JSPM\'s JSCOP, Pune',
-        category: 'Academic Achievement',
+    'codecircuit-outlier': {
+         title: 'CodeCircuit Hackathon – Outlier.ai',
+        date: 'May 2025',
+        location: 'Outlier.ai (Virtual)',
+        category: 'Hackathon Achievement',
         images: [
-            'assets/achievements/achievement12.jpg'
+            'assets/achievements/codecircuit1.png'
         ],
-        problem: 'Excel in computer engineering studies while balancing theoretical knowledge with practical application and industry relevance.',
+        problem: 'Developed TripGenie – an AI-powered Travel Planner Web App, as part of CodeCircuit Hackathon by Outlier.ai.',
         implementation: [
-            'Maintained consistently high academic performance across all subjects',
-            'Completed challenging projects in data structures, algorithms, and AI',
-            'Participated in coding competitions and technical events',
-            'Engaged in research projects and academic publications',
-            'Balanced coursework with internships and practical experience',
-            'Developed strong foundation in computer science fundamentals'
+            'Designed and implemented TripGenie, a smart travel planner with itinerary generation',
+            'Built an intuitive frontend delivering seamless user experience',
+            'Integrated AI-driven recommendations for destinations, stays, and activities',
+            'Optimized UI/UX with responsive design and interactive features',
+            'Collaborated in hackathon environment to meet tight deadlines',
+            'Shortlisted by Outlier.ai for freelance paid opportunities for outstanding frontend work'
         ],
-        impact: 'Achieved academic excellence with strong GPA while gaining practical experience through internships and projects, preparing for successful career in technology.',
-        technologies: ['Data Structures', 'Algorithms', 'Software Engineering', 'Database Systems', 'Computer Networks', 'AI/ML']
+        impact: 'TripGenie was recognized among top projects in CodeCircuit Hackathon by Outlier.ai, showcasing strong frontend development and problem-solving skills. This led to being shortlisted for freelance paid opportunities.',
+        technologies: ['HTML', 'CSS', 'JavaScript', 'React', 'AI/ML APIs', 'Responsive Web Design']
     }
 };
 
