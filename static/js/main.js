@@ -381,6 +381,7 @@ const projectData = {
         status: 'Completed',
         userSatisfaction: '4.8/5',
         images: [
+            'assets/achievements/codeheaven.mp4',
             'assets/achievements/codeheaven1.png',
             'assets/achievements/codeheaven2.png',
             'assets/achievements/codeheaven3.png',
@@ -389,7 +390,7 @@ const projectData = {
             'assets/achievements/codeheaven6.png',
             'assets/achievements/codeheaven7.png',
             'assets/achievements/codeheaven8.png',
-            
+
         ],
         problem: 'Create an interactive programming learning platform that provides real-time code editing, compilation, and step-by-step tutorials for multiple programming languages.',
         implementation: [
@@ -419,7 +420,7 @@ const projectData = {
         accuracy: '94.2%',
         precision: '93.7%',
         images: [
-            'assets/achievements/heart-project1.jpg',
+            'assets/achievements/HeartDisease.mp4',
         ],
         problem: 'Develop a machine learning model to predict heart disease risk using patient medical data, helping doctors make informed decisions for early intervention.',
         implementation: [
@@ -443,12 +444,14 @@ const projectData = {
     'ai-fitness': {
         title: 'AI Fitness Tracker',
         category: 'AI Application',
-        duration: '7 days',
+        duration: '3 months',
         status: 'Completed',
         accuracy: '98%',
         realTimeProcessing: '< 100ms',
         images: [
-            'assets/achievements/abc.png'
+            'assets/achievements/Fitnesstracker.mp4',
+            'assets/projects/fitness1.jpg',
+            'assets/projects/fitness2.jpg'
         ],
         problem: 'Create an AI-powered fitness tracking application that accurately predicts calories burned based on user activities, biometric data, and exercise patterns.',
         implementation: [
@@ -477,6 +480,7 @@ const projectData = {
         accuracy: '92%',
         recommendations: '10K+ generated',
         images: [
+            'assets/achievements/tripgenie.mp4',
             'assets/achievements/tripgenie1.png',
             'assets/achievements/tripgenie2.png'
         ],
@@ -567,7 +571,7 @@ const projectData = {
         accuracy: '96%',
         responseTime: '< 2s',
         images: [
-            'assets/projects/chatbot1.jpg',
+            'assets/achievements/chatbot1.png',
             'assets/projects/chatbot2.jpg'
         ],
         problem: 'Build an intelligent chatbot using IBM WatsonX to handle college admission queries, providing instant and accurate responses to prospective students.',
@@ -1054,11 +1058,11 @@ function initializeProjectModal() {
     // Add click listeners to project cards with enhanced effects
     projectCards.forEach((card, index) => {
         card.style.cursor = 'pointer';
-        
+
         // Add unique click indicator with random effects
         const clickIndicator = document.createElement('div');
         clickIndicator.className = 'project-click-indicator';
-        
+
         // Different indicator styles for variety
         const indicators = [
             '<i class="fas fa-mouse-pointer"></i> Click to Explore',
@@ -1069,16 +1073,16 @@ function initializeProjectModal() {
             '<i class="fas fa-bolt"></i> Quick View',
             '<i class="fas fa-gem"></i> Explore Project'
         ];
-        
+
         clickIndicator.innerHTML = indicators[index % indicators.length];
         card.appendChild(clickIndicator);
-        
+
         // Enhanced hover effects
         let hoverTimeout;
-        
+
         card.addEventListener('mouseenter', () => {
             clearTimeout(hoverTimeout);
-            
+
             // Add ripple effect on hover
             const ripple = document.createElement('div');
             ripple.style.cssText = `
@@ -1094,7 +1098,7 @@ function initializeProjectModal() {
                 z-index: 1;
                 animation: rippleExpand 1s ease-out forwards;
             `;
-            
+
             // Add ripple keyframes if not already added
             if (!document.getElementById('ripple-styles')) {
                 const rippleStyles = document.createElement('style');
@@ -1112,7 +1116,7 @@ function initializeProjectModal() {
                             opacity: 0;
                         }
                     }
-                    
+
                     @keyframes cardGlow {
                         0% { box-shadow: var(--shadow-heavy), 0 0 40px rgba(0, 212, 255, 0.3); }
                         50% { box-shadow: var(--shadow-heavy), 0 0 60px rgba(0, 212, 255, 0.5), 0 0 100px rgba(78, 205, 196, 0.2); }
@@ -1121,12 +1125,12 @@ function initializeProjectModal() {
                 `;
                 document.head.appendChild(rippleStyles);
             }
-            
+
             card.appendChild(ripple);
-            
+
             // Add glow animation
             card.style.animation = 'cardGlow 2s ease-in-out infinite';
-            
+
             // Remove ripple after animation
             setTimeout(() => {
                 if (ripple.parentNode === card) {
@@ -1134,13 +1138,13 @@ function initializeProjectModal() {
                 }
             }, 1000);
         });
-        
+
         card.addEventListener('mouseleave', () => {
             hoverTimeout = setTimeout(() => {
                 card.style.animation = '';
             }, 100);
         });
-        
+
         // Enhanced click effect
         card.addEventListener('click', (e) => {
             // Create click burst effect
@@ -1148,7 +1152,7 @@ function initializeProjectModal() {
             const rect = card.getBoundingClientRect();
             const x = e.clientX - rect.left;
             const y = e.clientY - rect.top;
-            
+
             burst.style.cssText = `
                 position: absolute;
                 left: ${x}px;
@@ -1161,7 +1165,7 @@ function initializeProjectModal() {
                 z-index: 15;
                 animation: burstExpand 0.6s ease-out forwards;
             `;
-            
+
             // Add burst animation if not already added
             if (!document.getElementById('burst-styles')) {
                 const burstStyles = document.createElement('style');
@@ -1184,16 +1188,16 @@ function initializeProjectModal() {
                 `;
                 document.head.appendChild(burstStyles);
             }
-            
+
             card.appendChild(burst);
-            
+
             // Remove burst after animation
             setTimeout(() => {
                 if (burst.parentNode === card) {
                     card.removeChild(burst);
                 }
             }, 600);
-            
+
             // Open modal
             const projectId = card.getAttribute('data-project');
             if (projectData[projectId]) {
@@ -1205,7 +1209,23 @@ function initializeProjectModal() {
     // Close modal functionality
     function closeProjectModal() {
         modal.classList.remove('active');
-        document.body.style.overflow = '';
+        document.body.style.overflow = 'auto';
+
+        // Reset media container to image element if it was changed to video
+        const mediaContainer = document.querySelector('.modal-media-container'); // Changed to a more general selector
+        const currentElement = mediaContainer.querySelector('img, video');
+        if (currentElement && currentElement.tagName === 'VIDEO') {
+            const imgElement = document.createElement('img');
+            imgElement.id = 'projectModalMainImage';
+            imgElement.className = 'modal-main-image'; // Ensure it has the class
+            imgElement.style.width = '100%';
+            imgElement.style.height = '100%';
+            imgElement.style.objectFit = 'cover';
+            imgElement.onerror = function() { // Re-add onerror handler
+                this.src = 'data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNDAwIiBoZWlnaHQ9IjMwMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cmVjdCB3aWR0aD0iNDAwIiBoZWlnaHQ9IjMwMCIgZmlsbD0iIzMzMzMzMyIvPjx0ZXh0IHg9IjUwJSIgeT0iNTAlIiBmb250LXNpemU9IjE4IiBmaWxsPSIjNjY2NjY2IiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBkeT0iMC4zZW0iPk5vIEltYWdlIEF2YWlsYWJsZTwvdGV4dD48L3N2Zz4=';
+            };
+            currentElement.parentNode.replaceChild(imgElement, currentElement);
+        }
     }
 
     modalClose.addEventListener('click', closeProjectModal);
@@ -1236,13 +1256,52 @@ function openProjectModal(projectId) {
     // Set main metrics
     document.getElementById('projectModalAccuracy').textContent = data.accuracy || 'N/A';
 
-    // Set main image (placeholder since images might not exist)
-    const mainImage = document.getElementById('projectModalMainImage');
-    mainImage.src = `static/${data.images[0]}`;
-    mainImage.alt = data.title;
-    mainImage.onerror = function() {
-        this.src = 'data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNDAwIiBoZWlnaHQ9IjMwMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cmVjdCB3aWR0aD0iNDAwIiBoZWlnaHQ9IjMwMCIgZmlsbD0iIzMzMzMzMyIvPjx0ZXh0IHg9IjUwJSIgeT0iNTAlIiBmb250LXNpemU9IjE4IiBmaWxsPSIjNjY2NjY2IiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBkeT0iMC4zZW0iPk5vIEltYWdlIEF2YWlsYWJsZTwvdGV4dD48L3N2Zz4=';
-    };
+    // Set main image or video
+    const modalMainImage = document.getElementById('projectModalMainImage'); // This is the img tag
+    const mediaContainer = modalMainImage.parentNode; // The container holding the image/video
+
+    // Clear previous media if any (important if switching between video and image)
+    const existingMedia = mediaContainer.querySelector('img, video');
+    if (existingMedia) {
+        existingMedia.remove();
+    }
+
+    if (data.images && data.images.length > 0) {
+        const mediaUrl = data.images[0];
+        const isVideo = mediaUrl.toLowerCase().endsWith('.mp4');
+
+        if (isVideo) {
+            // Replace image with video element
+            const videoElement = document.createElement('video');
+            videoElement.id = 'projectModalMainImage'; // Keep the ID for consistency
+            videoElement.src = `static/${mediaUrl}`; // Prepend static/
+            videoElement.controls = true;
+            videoElement.autoplay = false;
+            videoElement.style.width = '100%';
+            videoElement.style.height = '100%';
+            videoElement.style.objectFit = 'cover';
+            videoElement.alt = data.title;
+            videoElement.onerror = function() { // Handle video load errors similarly
+                this.outerHTML = '<div class="modal-media-error"><i class="fas fa-video-slash"></i> Video Unavailable</div>';
+            };
+
+            mediaContainer.appendChild(videoElement); // Append the video element
+        } else {
+            // Set the image element
+            modalMainImage.src = `static/${mediaUrl}`; // Prepend static/
+            modalMainImage.alt = data.title;
+            modalMainImage.style.display = 'block'; // Ensure image is visible
+            modalMainImage.onerror = function() { // Re-add onerror handler for images
+                this.src = 'data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNDAwIiBoZWlnaHQ9IjMwMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cmVjdCB3aWR0aD0iNDAwIiBoZWlnaHQ9IjMwMCIgZmlsbD0iIzMzMzMzMyIvPjx0ZXh0IHg9IjUwJSIgeT0iNTAlIiBmb250LXNpemU9IjE4IiBmaWxsPSIjNjY2NjY2IiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBkeT0iMC4zZW0iPk5vIEltYWdlIEF2YWlsYWJsZTwvdGV4dD48L3N2Zz4=';
+            };
+        }
+    } else {
+        // Fallback if no media is available
+        modalMainImage.src = '';
+        modalMainImage.alt = 'No media available';
+        modalMainImage.style.display = 'none'; // Hide image if no source
+        mediaContainer.innerHTML += '<div class="modal-media-error"><i class="fas fa-image"></i> No Media Available</div>';
+    }
 
     // Create implementation list
     const implementationContainer = document.getElementById('projectModalImplementation');
@@ -1498,20 +1557,20 @@ function openCertificateModal(certificateId) {
     // Set certificate image
     const certificateImage = document.getElementById('certificateModalImage');
     const certificateLoading = document.getElementById('certificateLoading');
-    
+
     // Show loading state
     certificateLoading.style.display = 'flex';
     certificateImage.style.display = 'none';
-    
+
     certificateImage.src = `static/${data.certificateImage}`;
     certificateImage.alt = data.title;
-    
+
     // Handle image load/error
     certificateImage.onload = function() {
         certificateLoading.style.display = 'none';
         certificateImage.style.display = 'block';
     };
-    
+
     certificateImage.onerror = function() {
         certificateLoading.innerHTML = `
             <i class="fas fa-certificate"></i>
