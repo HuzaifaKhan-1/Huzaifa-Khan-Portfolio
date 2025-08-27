@@ -757,6 +757,15 @@ body {
     overflow-y: auto;
 }
 
+.modal-body2 {
+    display: grid;
+    grid-template-columns: 1fr ;
+    gap: 2rem;
+    padding: 2rem;
+    max-height: calc(90vh - 120px);
+    overflow-y: auto;
+}
+
 .modal-gallery {
     display: flex;
     flex-direction: column;
