@@ -413,6 +413,26 @@
                 <button class="filter-btn" data-filter="ai">AI Applications</button>
             </div>
             <div class="projects-grid">
+                <div class="project-card" data-category="ai" data-project="quantum-circuit">
+                    <div class="project-image">
+                        <i class="fas fa-atom"></i>
+                    </div>
+                    <div class="project-content">
+                        <h3>Quantum Circuit Playground</h3>
+                        <p>Interactive quantum computing platform using Qiskit for quantum circuit design and simulation</p>
+                        <div class="project-tech">
+                            <span class="tech-tag">Qiskit</span>
+                            <span class="tech-tag">Python</span>
+                            <span class="tech-tag">Quantum Computing</span>
+                        </div>
+                        <div class="project-links">
+                            <a href="#" class="project-link">
+                                <i class="fab fa-github"></i>
+                                GitHub
+                            </a>
+                        </div>
+                    </div>
+                </div>
                 <div class="project-card" data-category="web" data-project="codeheaven">
                     <div class="project-image">
                         <i class="fas fa-code"></i>
@@ -693,6 +713,47 @@
                     </div>
                 </div>
                 <div class="skill-category">
+                    <h3>Quantum Computing</h3>
+                    <div class="skills-list">
+                        <div class="skill-item">
+                            <div class="skill-info">
+                                <span class="skill-name">Qiskit</span>
+                                <span class="skill-percentage">75%</span>
+                            </div>
+                            <div class="skill-bar">
+                                <div class="skill-progress" data-width="75"></div>
+                            </div>
+                        </div>
+                        <div class="skill-item">
+                            <div class="skill-info">
+                                <span class="skill-name">Quantum Algorithms</span>
+                                <span class="skill-percentage">70%</span>
+                            </div>
+                            <div class="skill-bar">
+                                <div class="skill-progress" data-width="70"></div>
+                            </div>
+                        </div>
+                        <div class="skill-item">
+                            <div class="skill-info">
+                                <span class="skill-name">Quantum Information Theory</span>
+                                <span class="skill-percentage">65%</span>
+                            </div>
+                            <div class="skill-bar">
+                                <div class="skill-progress" data-width="65"></div>
+                            </div>
+                        </div>
+                        <div class="skill-item">
+                            <div class="skill-info">
+                                <span class="skill-name">Quantum Circuit Design</span>
+                                <span class="skill-percentage">80%</span>
+                            </div>
+                            <div class="skill-bar">
+                                <div class="skill-progress" data-width="80"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="skill-category">
                     <h3>Databases & Tools</h3>
                     <div class="skills-list">
                         <div class="skill-item">
@@ -745,6 +806,15 @@
                 <div class="section-subtitle">Professional credentials and achievements</div>
             </div>
             <div class="certifications-grid">
+                <div class="cert-card cert-clickable" data-certificate="ivm-quantum">
+                    <div class="cert-icon">
+                        <i class="fas fa-atom"></i>
+                    </div>
+                    <h3>Basics of Quantum Information Badge</h3>
+                    <p class="cert-issuer">IVM</p>
+                    <div class="cert-badge">Verified</div>
+                    <div class="cert-click-indicator">Click to view certificate</div>
+                </div>
                 <div class="cert-card cert-clickable" data-certificate="google-ai-educators">
                     <div class="cert-icon">
                         <i class="fab fa-google"></i>
@@ -906,8 +976,11 @@
             </div>
             <div class="modal-body">
                 <div class="modal-gallery">
-                    <div class="modal-main-image">
-                        <img id="projectModalMainImage" src="" alt="">
+                    <div class="modal-media-container">
+                        <img id="projectModalMainImage" src="" alt="" style="width: 100%; height: 100%; object-fit: cover;">
+                    </div>
+                    <div id="projectModalThumbnails" class="modal-thumbnails">
+                        <!-- Thumbnail images/videos will be inserted here -->
                     </div>
                     <div class="project-metrics-highlight">
                         <div class="highlight-metric">
